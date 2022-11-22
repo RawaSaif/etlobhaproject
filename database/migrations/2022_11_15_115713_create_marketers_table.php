@@ -26,8 +26,10 @@ return new class extends Migration
             $table->string('twiter');
             $table->string('whatsapp');
             $table->string('youtube');
+            $table->string('instegram');
+             $table->longText('socialmediatext');
             $table->enum('status',['active','not_active'])->default('active');
-            $table->enum('register_status',['active','not_active'])->default('active');
+          
             $table->boolean("is_deleted")->default(0);
             $table->unsignedBigInteger('country_id')->nullable();
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
