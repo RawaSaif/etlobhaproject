@@ -8,11 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Template extends Model
 {
     use HasFactory;
-    protected $fillable = ['script_name','logo','comments_status','customers_status','package_id','status','is_deleted'];
+    protected $fillable = ['name','parent_id','status','is_deleted'];
 
-          public function package()
-    {
-        return $this->belongsTo(Package::class, 'package_id', 'id');
+    public function packages()
+{
+    return $this->belongsToMany(
+        Package::class,
+        'packages_templates',
+        'template_id',
+        'package_id'
 
+        );
     }
+
+
 }

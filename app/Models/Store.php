@@ -23,10 +23,15 @@ class Store extends Model
     {
         return $this->belongsTo(Activity::class, 'activity_id', 'id');
     }
-          public function package()
+     public function packages()
     {
-        return $this->belongsTo(Package::class, 'package_id', 'id');
+          return $this->belongsToMany(
+          Store::class,
+          'packages_stores',
+          'store_id',
+          'package_id'
 
+     );
     }
      public function user()
     {
@@ -36,7 +41,7 @@ class Store extends Model
     {
         return $this->belongsTo(Setting::class, 'setting_id', 'id');
     }
-    
+
     public function page()
     {
         return $this->hasMany(Page::class);

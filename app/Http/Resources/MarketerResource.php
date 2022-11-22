@@ -28,10 +28,12 @@ class MarketerResource extends JsonResource
             'twiter' => $this->twiter,
             'whatsapp' => $this->whatsapp,
             'youtube' => $this->youtube,
+            'instegram' => $this->instegram,
+            'socialmediatext' => $this->socialmediatext,
             'image' =>$this->image,
             'status' => $this->status,
             'is_deleted' => $this->is_deleted,
-            'register_status' => $this->register_status,
+           
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
             'country' => New CountryResource($this->country),

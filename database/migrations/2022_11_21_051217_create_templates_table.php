@@ -15,14 +15,12 @@ return new class extends Migration
     {
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
-            $table->string('script_name');
-            $table->string('logo');
-            $table->enum('comments_status',['active','not_active'])->default('active');
-            $table->enum('customers_status',['active','not_active'])->default('active');
+            $table->string('name');
+            $table->integer('parent_id');
+
             $table->enum('status',['active','not_active'])->default('active');
             $table->boolean('is_deleted')->default(0);
-            $table->unsignedBigInteger('package_id')->nullable();
-            $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
+           
             $table->timestamps();
         });
     }
