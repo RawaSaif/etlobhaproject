@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
+            $table->integer('number')->unique();
             $table->string('name');
+            $table->string('icon');
             $table->integer('parent_id')->nullable();
             $table->enum('for',['store','etlobha'])->default('etlobha');
             $table->unsignedBigInteger('store_id')->nullable();

@@ -19,8 +19,18 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'user_id',
+        'user_name',
         'email',
         'password',
+        'image',
+        'gender',
+        'user_type',
+        'phonenumber',
+        'city_id',
+        'country_id',
+         'status',
+       'is_deleted'
     ];
 
     /**
@@ -59,5 +69,13 @@ class User extends Authenticatable
         'user_id',
         'service_id'
         );
+    }
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+          public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id', 'id');
     }
 }
