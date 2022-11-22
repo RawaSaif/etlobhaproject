@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Apperance extends Model
+class Website_setting extends Model
 {
     use HasFactory;
-    protected $fillable = ['key','value','status','is_deleted'];
+    protected $fillable = ['key','value','is_deleted'];
 }

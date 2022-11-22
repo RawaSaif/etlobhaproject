@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Unit extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','pdf_file','course_id','status','is_deleted'];
+    protected $fillable = ['title','file','course_id','status','is_deleted'];
     public function course()
     {
         return $this->belongsTo(Course::class);

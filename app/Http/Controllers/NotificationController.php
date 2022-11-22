@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Apperance;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
-class ApperanceController extends Controller
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ApperanceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Apperance  $apperance
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function show(Apperance $apperance)
+    public function show(Notification $notification)
     {
         //
     }
@@ -52,10 +52,10 @@ class ApperanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Apperance  $apperance
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function edit(Apperance $apperance)
+    public function edit(Notification $notification)
     {
         //
     }
@@ -64,10 +64,10 @@ class ApperanceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Apperance  $apperance
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Apperance $apperance)
+    public function update(Request $request, Notification $notification)
     {
         //
     }
@@ -75,10 +75,10 @@ class ApperanceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Apperance  $apperance
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Apperance $apperance)
+    public function destroy(Notification $notification)
     {
         //
     }

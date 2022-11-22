@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-// use App\Models\Country;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CityResource extends JsonResource
+class NotificationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,15 +16,15 @@ class CityResource extends JsonResource
     {
         return [
             'id' =>$this->id,
-            'name' => $this->name,
-            'name_en' => $this->name_en,
-            'code' => $this->code,
-            'status' => $this->status,
+            'notification_time' => $this->notification_time,
+            'description' => $this->description,
+             'status' => $this->status,
             'is_deleted' => $this->is_deleted,
             'created_at' => (string) $this->created_at,
-            'updated_at' => (string) $this->updated_at,
-            'country' => New CountryResource($this->country),
+             'updated_at' => (string) $this->updated_at,
+             'user' => New UserResource($this->user),
+             'type' => New Notification_typeResource($this->notification_type),
           ];
-       
+          
     }
 }

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->double('purchasing_price');
             $table->double('selling_price');
             $table->integer('quantity');
+            $table->integer('less_qty');
+            $table->double('weight');
             $table->string('image');
             $table->text("tags");
             $table->unsignedBigInteger('store_id')->nullable();
