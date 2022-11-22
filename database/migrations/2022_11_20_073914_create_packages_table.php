@@ -19,8 +19,6 @@ return new class extends Migration
             $table->double('monthly_price');
             $table->double('yearly_price');
             $table->double('discount');
-            $table->double('duration');
-             $table->timestamp('end_at')->nullable();
             $table->enum('status',['active','not_active'])->default('active');
             $table->boolean('is_deleted')->default(0);
             $table->timestamps();

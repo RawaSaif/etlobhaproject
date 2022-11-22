@@ -19,8 +19,6 @@ return new class extends Migration
            $table->enum('discount_type',['fixed','percent'])->default('percent');
            $table->double('total_price');
            $table->double('discount');
-           $table->integer('discount_percent');
-           $table->double('less_of_total_Purchases');
            $table->timestamp('expire_date')->nullable();
            $table->unsignedBigInteger('total_redemptions')->nullable();
            $table->unsignedBigInteger('user_redemptions')->nullable();
