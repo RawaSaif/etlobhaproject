@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->id();
+        Schema::create('paymenttypes', function (Blueprint $table) {
+           $table->id();
             $table->string('name');
             $table->string('image');
             $table->enum('status',['active','not_active'])->default('active');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('paymenttypes');
     }
 };

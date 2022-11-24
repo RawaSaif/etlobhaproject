@@ -18,13 +18,11 @@ return new class extends Migration
             $table->string('order_number')->unique();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('store_id')->nullable();
-            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->integer('quantity');
             $table->double('total_price');
             $table->double('tax');
             $table->double('discount');
-            $table->enum('order_status',['pending','completed','not_completed'])->default('pending');
+            $table->enum('order_status',['pending','completed','delivery_in_progress','ready','canceled'])->default('pending');
   $table->enum('payment_status', ['pending', 'paid', 'failed'])
                 ->default('pending');
             $table->timestamps();

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Shippingcompany;
+use App\Models\Shippingtype;
 use Illuminate\Http\Request;
 
-class ShippingcompanyController extends Controller
+class ShippingtypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ShippingcompanyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Shippingcompany  $shippingcompany
+     * @param  \App\Models\Shippingtype  $shippingtype
      * @return \Illuminate\Http\Response
      */
-    public function show(Shippingcompany $shippingcompany)
+    public function show(Shippingtype $shippingtype)
     {
         //
     }
@@ -52,10 +52,10 @@ class ShippingcompanyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Shippingcompany  $shippingcompany
+     * @param  \App\Models\Shippingtype  $shippingtype
      * @return \Illuminate\Http\Response
      */
-    public function edit(Shippingcompany $shippingcompany)
+    public function edit(Shippingtype $shippingtype)
     {
         //
     }
@@ -64,10 +64,10 @@ class ShippingcompanyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Shippingcompany  $shippingcompany
+     * @param  \App\Models\Shippingtype  $shippingtype
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shippingcompany $shippingcompany)
+    public function update(Request $request, Shippingtype $shippingtype)
     {
         //
     }
@@ -75,10 +75,10 @@ class ShippingcompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Shippingcompany  $shippingcompany
+     * @param  \App\Models\Shippingtype  $shippingtype
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shippingcompany $shippingcompany)
+    public function destroy(Shippingtype $shippingtype)
     {
         //
     }

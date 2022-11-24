@@ -21,8 +21,6 @@ return new class extends Migration
             $table->enum('type',['complaint','enquiry','suggestion'])->default('enquiry');
             $table->enum('status',['finished','not_finished','pending'])->default('pending');
             $table->boolean('is_deleted')->default(0);
-            $table->unsignedBigInteger('activity_id')->nullable();
-            $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
             $table->unsignedBigInteger('store_id')->nullable();
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->timestamps();
