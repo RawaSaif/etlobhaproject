@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('website_settings', function (Blueprint $table) {
+        Schema::create('pages_page_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
-            $table->string('value');
-            $table->enum('status',['active','not_active'])->default('active');
-            $table->boolean('is_deleted')->default(0);
+            $table->bigInteger('page_id')->unsigned();
+            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
+            $table->bigInteger('page_category_id')->unsigned();
+            $table->foreign('page_category_id')->references('id')->on('page_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('website_settings');
+        Schema::dropIfExists('pages_page_categories');
     }
 };

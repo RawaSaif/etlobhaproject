@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('social_media', function (Blueprint $table) {
+        Schema::create('website_socialmedia', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('logo');
             $table->string('link');
             $table->enum('status',['active','not_active'])->default('active');
             $table->boolean('is_deleted')->default(0);
-            $table->unsignedBigInteger('setting_id')->nullable();
-            $table->foreign('setting_id')->references('id')->on('settings')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_media');
+        Schema::dropIfExists('website_socialmedia');
     }
 };

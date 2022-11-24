@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('seo_title');
             $table->string('seo_link');
             $table->longText('seo_desc');
-            $table->text('cat_pages');
             $table->text('tags');
             $table->unsignedBigInteger('store_id')->nullable();
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
