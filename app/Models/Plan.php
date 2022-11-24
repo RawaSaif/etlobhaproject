@@ -15,7 +15,8 @@ class Plan extends Model
      return $this->belongsToMany(
         Package::class,
         'packages_plans',
-        'package_id',
-        'plan_id');
+        'plan_id',
+        'package_id'
+        );
     }
 }

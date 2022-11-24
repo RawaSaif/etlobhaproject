@@ -26,6 +26,8 @@ return new class extends Migration
            $table->boolean('exception_discount_product')->default(0);
            $table->enum('status',['active','not_active'])->default('active');
            $table->boolean('is_deleted')->default(0);
+           $table->unsignedBigInteger('store_id')->nullable();
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
            $table->timestamps();
         });
     }

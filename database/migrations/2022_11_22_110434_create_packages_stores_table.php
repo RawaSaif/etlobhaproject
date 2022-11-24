@@ -19,6 +19,9 @@ return new class extends Migration
          $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
         $table->bigInteger('store_id')->unsigned();
         $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+        $table->timestamp('start_at')->nullable();
+        $table->timestamp('end_at')->nullable();
+        $table->integer('period');
         $table->timestamps();
 
         });
