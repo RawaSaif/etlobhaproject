@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('website_settings', function (Blueprint $table) {
+        Schema::create('page_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
-            $table->string('value');
+            $table->string('name');
             $table->enum('status',['active','not_active'])->default('active');
             $table->boolean('is_deleted')->default(0);
             $table->timestamps();
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('website_settings');
+        Schema::dropIfExists('page_categories');
     }
 };

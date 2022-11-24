@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('replaycomments', function (Blueprint $table) {
             $table->id();
-            $table->string('comment_text');
+            $table->text('comment_text');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
              $table->unsignedBigInteger('comment_id')->nullable();
