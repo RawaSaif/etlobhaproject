@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ServicesUsers;
+use App\Models\Paymenttype;
 use Illuminate\Http\Request;
 
-class ServicesUsersController extends Controller
+class PaymenttypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ServicesUsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ServicesUsers  $servicesUsers
+     * @param  \App\Models\Paymenttype  $paymenttype
      * @return \Illuminate\Http\Response
      */
-    public function show(ServicesUsers $servicesUsers)
+    public function show(Paymenttype $paymenttype)
     {
         //
     }
@@ -52,10 +52,10 @@ class ServicesUsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ServicesUsers  $servicesUsers
+     * @param  \App\Models\Paymenttype  $paymenttype
      * @return \Illuminate\Http\Response
      */
-    public function edit(ServicesUsers $servicesUsers)
+    public function edit(Paymenttype $paymenttype)
     {
         //
     }
@@ -64,10 +64,10 @@ class ServicesUsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ServicesUsers  $servicesUsers
+     * @param  \App\Models\Paymenttype  $paymenttype
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ServicesUsers $servicesUsers)
+    public function update(Request $request, Paymenttype $paymenttype)
     {
         //
     }
@@ -75,10 +75,10 @@ class ServicesUsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ServicesUsers  $servicesUsers
+     * @param  \App\Models\Paymenttype  $paymenttype
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ServicesUsers $servicesUsers)
+    public function destroy(Paymenttype $paymenttype)
     {
         //
     }

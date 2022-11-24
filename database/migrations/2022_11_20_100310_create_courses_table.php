@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string('name');
             $table->longText('description');
-            $table->time("duration");
-            $table->text("tags");
+            $table->time('duration');
+            $table->text('tags');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('status',['active','not_active'])->default('active');

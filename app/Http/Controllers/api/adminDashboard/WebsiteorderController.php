@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Storerequest;
+use App\Models\Websiteorder;
 use Illuminate\Http\Request;
 
-class StorerequestController extends Controller
+class WebsiteorderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class StorerequestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Storerequest  $storerequest
+     * @param  \App\Models\Websiteorder  $websiteorder
      * @return \Illuminate\Http\Response
      */
-    public function show(Storerequest $storerequest)
+    public function show(Websiteorder $websiteorder)
     {
         //
     }
@@ -52,10 +52,10 @@ class StorerequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Storerequest  $storerequest
+     * @param  \App\Models\Websiteorder  $websiteorder
      * @return \Illuminate\Http\Response
      */
-    public function edit(Storerequest $storerequest)
+    public function edit(Websiteorder $websiteorder)
     {
         //
     }
@@ -64,10 +64,10 @@ class StorerequestController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Storerequest  $storerequest
+     * @param  \App\Models\Websiteorder  $websiteorder
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Storerequest $storerequest)
+    public function update(Request $request, Websiteorder $websiteorder)
     {
         //
     }
@@ -75,10 +75,10 @@ class StorerequestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Storerequest  $storerequest
+     * @param  \App\Models\Websiteorder  $websiteorder
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Storerequest $storerequest)
+    public function destroy(Websiteorder $websiteorder)
     {
         //
     }

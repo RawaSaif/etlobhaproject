@@ -5,18 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Plan extends Model
-{
+class Shippingtype extends Model
+
+    {
     use HasFactory;
     protected $fillable = ['name','status','is_deleted'];
 
-    public function packages()
+      public function stores()
     {
      return $this->belongsToMany(
-        Package::class,
-        'packages_plans',
-        'plan_id',
-        'package_id'
+        Store::class,
+        'shippingtypes_stores',
+        'shippingtype_id',
+        'store_id'
+
         );
     }
+
+
+
+
 }

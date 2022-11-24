@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notification_type extends Model
+class OrderItem extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','status','is_deleted'];
+     protected $fillable = ['order_id','product_id','quantity','price'];
 
-  
 
 }

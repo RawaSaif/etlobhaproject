@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('shippingcompanies', function (Blueprint $table) {
+        Schema::create('websiteorders', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('status',['active','not_active'])->default('active');
+            $table->string('order_number')->unique();
+            $table->enum('type', ['store', 'service'])->default('store');
+            $table->enum('status',['accept','reject'])->default('accept');
             $table->boolean('is_deleted')->default(0);
+              $table->unsignedBigInteger('store_id')->nullable();
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shippingcompanies');
+        Schema::dropIfExists('websiteorders');
     }
 };

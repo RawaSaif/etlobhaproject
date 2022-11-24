@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GeneralShop extends Model
+class Platform extends Model
 {
     use HasFactory;
       protected $fillable = ['name','logo','link','status','is_deleted'];
@@ -30,3 +30,4 @@ class GeneralShop extends Model
         return asset('storage/logos/generalshop') . '/' . $logo;
     }
 }
+

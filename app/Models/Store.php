@@ -46,4 +46,26 @@ class Store extends Model
     {
         return $this->hasMany(Page::class);
     }
+      public function shippingtypes()
+    {
+     return $this->belongsToMany(
+        Shippingtype::class,
+        'shippingtypes_stores',
+        'store_id',
+        'shippingtype_id'
+
+
+        );
+    }
+    public function paymenttypes()
+    {
+     return $this->belongsToMany(
+        Paymenttype::class,
+        'paymenttypes_stores',
+        'store_id',
+        'paymenttype_id'
+
+
+        );
+    }
 }

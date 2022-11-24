@@ -13,17 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('packages_stores', function (Blueprint $table) {
+        Schema::create('paymenttypes_stores', function (Blueprint $table) {
             $table->id();
-        $table->bigInteger('package_id')->unsigned();
-         $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
+             $table->bigInteger('paymentype_id')->unsigned();
+         $table->foreign('paymentype_id')->references('id')->on('paymenttypes')->onDelete('cascade');
         $table->bigInteger('store_id')->unsigned();
         $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
-        $table->timestamp('start_at')->nullable();
-        $table->timestamp('end_at')->nullable();
-        $table->integer('period');
         $table->timestamps();
-
         });
     }
 
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packages_stores');
+        Schema::dropIfExists('paymenttypes_stores');
     }
 };

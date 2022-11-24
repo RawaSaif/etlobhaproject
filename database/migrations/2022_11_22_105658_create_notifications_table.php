@@ -19,8 +19,8 @@ return new class extends Migration
             $table->timestamp('notification_time')->nullable();
             $table->enum('status',['active','not_active'])->default('active');
             $table->boolean('is_deleted')->default(0);
-            $table->unsignedBigInteger('type_id')->nullable();
-            $table->foreign('type_id')->references('id')->on('notification_types')->onDelete('cascade');
+            $table->unsignedBigInteger('notificationtype_id')->nullable();
+            $table->foreign('notificationtype_id')->references('id')->on('notification_types')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

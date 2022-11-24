@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('services_users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('phoneNumber');
-            $table->bigInteger('service_id')->unsigned();
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        Schema::create('platforms', function (Blueprint $table) {
+             $table->id();
+             $table->string('name');
+            $table->string('logo');
+            $table->string('link');
             $table->enum('status',['active','not_active'])->default('active');
             $table->boolean('is_deleted')->default(0);
             $table->timestamps();
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services_users');
+        Schema::dropIfExists('platforms');
     }
 };

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Currency extends Model
 {
     use HasFactory;
-     protected $fillable = ['name','image','status','is_deleted'];
+     protected $fillable = ['name','name_en','image','status','is_deleted'];
      public function setImageAttribute($image)
     {
         if (!is_null($image)) {

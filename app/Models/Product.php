@@ -8,13 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = ['name','sku','for','description','purchasing_price','selling_price','quantity','less_qty','weight','image','tags','cat_id','store_id','status','is_deleted'];
-    
+
     public function comment()
     {
         return $this->hasMany(Comment::class);
     }
+
+   public function orders()
+    {
+          return $this->belongsToMany(
+          Order::class,
+          'order_items',
+          'product_id',
+          'order_id'
+
+     );
+    }
+
     public function setImageAttribute($image)
     {
         if (!is_null($image)) {
