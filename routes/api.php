@@ -21,7 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('changeCountryStatus/{id}',[App\Http\Controllers\api\adminDashboard\CountryController::class,'changeStatus']);
 Route::post('changeCityStatus/{id}',[App\Http\Controllers\api\adminDashboard\CityController::class,'changeStatus']);
 Route::post('changeMarketerStatus/{id}', [App\Http\Controllers\api\adminDashboard\MarketerController::class,'changeStatus']);
-
+Route::post('changeExplainVideosStatus/{id}', [App\Http\Controllers\api\adminDashboard\ExplainVideosController::class,'changeStatus']);
+Route::post('changeCourseStatus/{id}', [App\Http\Controllers\api\adminDashboard\CourseController::class,'changeStatus']);
+Route::post('changeUnitStatus/{id}', [App\Http\Controllers\api\adminDashboard\UnitController::class,'changeStatus']);
+Route::post('changeVideoStatus/{id}', [App\Http\Controllers\api\adminDashboard\VideoController::class,'changeStatus']);
 Route::post('changeActivityStatus/{id}',[App\Http\Controllers\api\adminDashboard\ActivityController::class,'changeStatus']);
 Route::post('changePlatformStatus/{id}',[App\Http\Controllers\api\adminDashboard\PlatformController::class,'changeStatus']);
 Route::post('changeServiceStatus/{id}', [App\Http\Controllers\api\adminDashboard\ServiceController::class,'changeStatus']);
@@ -30,6 +33,10 @@ Route::post('changeServiceStatus/{id}', [App\Http\Controllers\api\adminDashboard
 Route::resource('country',App\Http\Controllers\api\adminDashboard\CountryController::class);
 Route::resource('city',App\Http\Controllers\api\adminDashboard\CityController::class);
 Route::resource('marketer',App\Http\Controllers\api\adminDashboard\MarketerController::class);
+Route::resource('explainVideos',App\Http\Controllers\api\adminDashboard\ExplainVideosController::class);
+Route::resource('course',App\Http\Controllers\api\adminDashboard\CourseController::class);
+Route::resource('unit',App\Http\Controllers\api\adminDashboard\UnitController::class);
+Route::resource('video',App\Http\Controllers\api\adminDashboard\VideoController::class);
 Route::resource('activity',App\Http\Controllers\api\adminDashboard\ActivityController::class);
 Route::resource('platform',App\Http\Controllers\api\adminDashboard\PlatformController::class);
 Route::resource('service',App\Http\Controllers\api\adminDashboard\ServiceController::class);

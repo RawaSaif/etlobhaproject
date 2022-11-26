@@ -17,7 +17,7 @@ class ServiceController extends BaseController
      */
     public function index()
     {
-        
+
         $success['Services']=ServiceResource::collection(Service::where('is_deleted',0)->get());
         $success['status']= 200;
 
@@ -60,7 +60,7 @@ class ServiceController extends BaseController
             'price' => $request->price,
           ]);
 
-       
+
          $success['services']=New ServiceResource( $service);
         $success['status']= 200;
 
@@ -147,10 +147,10 @@ class ServiceController extends BaseController
                'file' => $request->input('file'),
                'price' => $request->input('price')
            ]);
-          
+
            $success['services']=New ServiceResource($service);
            $success['status']= 200;
-   
+
             return $this->sendResponse($success,'تم التعديل بنجاح','service updated successfully');
     }
 
@@ -160,17 +160,18 @@ class ServiceController extends BaseController
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy($service)
     {
         $service = Service::query()->find($service);
         if ($service->is_deleted==1){
             return $this->sendError("االخدمة غير موجودة","service is't exists");
             }
            $service->update(['is_deleted' => 1]);
-   
+
            $success['cities']=New ServiceResource($service);
            $success['status']= 200;
-   
+
             return $this->sendResponse($success,'تم حذف الخدمة بنجاح','service deleted successfully');
     }
 }
+

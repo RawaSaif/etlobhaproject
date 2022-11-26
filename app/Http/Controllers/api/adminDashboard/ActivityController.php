@@ -17,10 +17,10 @@ class ActivityController extends BaseController
      */
     public function index()
     {
-        $success['Activities']=ActivityResource::collection(Activity::where('is_deleted',0)->get());
+        $success['activities']=ActivityResource::collection(Activity::where('is_deleted',0)->get());
         $success['status']= 200;
 
-         return $this->sendResponse($success,'تم ارجاع جميع الانشطة بنجاح','Activities return successfully'); 
+         return $this->sendResponse($success,'تم ارجاع جميع الانشطة بنجاح','Activities return successfully');
     }
 
     /**
@@ -53,7 +53,7 @@ class ActivityController extends BaseController
             'name' => $request->name,
           ]);
 
-        
+
          $success['activities']=New ActivityResource($activity );
         $success['status']= 200;
 
@@ -74,7 +74,7 @@ class ActivityController extends BaseController
                }
               $success['activities']=New ActivityResource($activity);
               $success['status']= 200;
-      
+
                return $this->sendResponse($success,'تم عرض النشاط بنجاح','Activity showed successfully');
     }
     public function changeStatus($id)
@@ -121,7 +121,7 @@ class ActivityController extends BaseController
             $input = $request->all();
            $validator =  Validator::make($input ,[
                 'name'=>'required|string|max:255'
-          
+
            ]);
            if ($validator->fails())
            {
@@ -130,12 +130,12 @@ class ActivityController extends BaseController
            }
            $activity->update([
                'name' => $request->input('name'),
-              
+
            ]);
-          
+
            $success['activities']=New ActivityResource($activity);
            $success['status']= 200;
-   
+
             return $this->sendResponse($success,'تم التعديل بنجاح','Activity updated successfully');
     }
 
@@ -152,10 +152,10 @@ class ActivityController extends BaseController
             return $this->sendError("النشاط غير موجودة","activity is't exists");
             }
            $activity->update(['is_deleted' => 1]);
-   
+
            $success['activities']=New ActivityResource($activity);
            $success['status']= 200;
-   
+
             return $this->sendResponse($success,'تم حذف النشاط بنجاح','Activity deleted successfully');
     }
 }
