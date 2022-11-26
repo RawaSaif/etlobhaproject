@@ -122,7 +122,7 @@ class CityController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, City $city)
-    {
+{
         if ($city->is_deleted==1){
          return $this->sendError("المدينه غير موجودة","city is't exists");
     }
@@ -149,7 +149,7 @@ class CityController extends BaseController
         $success['status']= 200;
 
          return $this->sendResponse($success,'تم التعديل بنجاح','City updated successfully');
-    }
+}
 
     /**
      * Remove the specified resource from storage.
