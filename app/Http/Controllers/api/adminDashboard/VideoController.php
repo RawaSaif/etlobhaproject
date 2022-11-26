@@ -109,13 +109,13 @@ class VideoController extends BaseController
     public function update(Request $request, Video $video)
      {
          if ($video->is_deleted==1){
-         return $this->sendError("الوح\ة غير موجودة","video is't exists");
+         return $this->sendError("الفيديو غير موجودة","video is't exists");
           }
          $input = $request->all();
          $validator =  Validator::make($input ,[
-         'title'=>'required|string|max:255',
-            'file'=>'mimes:pdf,doc,excel',
-             'course_id' =>'required|exists:courses,id'
+        'video'=>'required|mimes:mp4,ogx,oga,ogv,ogg,webm',
+
+            'unit_id' =>'required|exists:units,id'
          ]);
          if ($validator->fails())
          {
@@ -123,9 +123,9 @@ class VideoController extends BaseController
             return $this->sendError(null,$validator->errors());
          }
          $video->update([
-            'title' => $request->input('name'),
-            'file' => $request->input('file'),
-             'course_id' => $request->input('course_id'),
+            'video' => $request->input('video'),
+            'unit_id' => $request->input('unit_id'),
+
 
          ]);
          //$country->fill($request->post())->update();
@@ -161,8 +161,17 @@ class VideoController extends BaseController
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video $video)
-    {
-        //
+    public function destroy($video)
+     {
+       $video = Video::query()->find($video);
+         if ($video->is_deleted==1){
+         return $this->sendError("الفيديو غير موجودة","video is't exists");
+         }
+        $video->update(['is_deleted' => 1]);
+
+        $success['video']=New VideoResource($video);
+        $success['status']= 200;
+
+         return $this->sendResponse($success,'تم حذف الفيديو بنجاح','video deleted successfully');
     }
 }
