@@ -17,7 +17,7 @@ class MarketerController extends BaseController
      */
     public function index()
     {
-      $success['countries']=MarketerResource::collection(Marketer::where('is_deleted',0)->get());
+      $success['marketers']=MarketerResource::collection(Marketer::where('is_deleted',0)->get());
         $success['status']= 200;
 
          return $this->sendResponse($success,'تم ارجاع المندوبين بنجاح','marketer return successfully');
