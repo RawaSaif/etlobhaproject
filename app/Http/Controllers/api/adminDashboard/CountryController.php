@@ -48,7 +48,7 @@ class CountryController extends  BaseController
         $validator =  Validator::make($input ,[
             'name'=>'required|string|max:255',
             'name_en'=>'required|string|max:255',
-            'country_num' =>'required',
+            'code' =>'required',
         ]);
         if ($validator->fails())
         {
@@ -57,7 +57,7 @@ class CountryController extends  BaseController
         $country = Country::create([
             'name' => $request->name,
             'name_en' => $request->name_en,
-            'country_num' => $request->country_num,
+            'code' => $request->code,
           ]);
 
          // return new CountryResource($country);
@@ -133,7 +133,7 @@ class CountryController extends  BaseController
         $validator =  Validator::make($input ,[
           'name'=>'required|string|max:255',
             'name_en'=>'required|string|max:255',
-            'country_num' =>'required'
+            'code' =>'required'
         ]);
         if ($validator->fails())
         {
@@ -143,7 +143,7 @@ class CountryController extends  BaseController
         $country->update([
             'name' => $request->input('name'),
             'name_en' => $request->input('name_en'),
-            'country_num' => $request->input('country_num')
+            'code' => $request->input('code')
         ]);
        //$country->fill($request->post())->update();
         $success['countriesd']=New CountryResource($country);

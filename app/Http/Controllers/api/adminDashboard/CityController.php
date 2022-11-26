@@ -47,7 +47,7 @@ class CityController extends BaseController
         $validator =  Validator::make($input ,[
             'name'=>'required|string|max:255',
             'name_en'=>'required|string|max:255',
-            'city_num' =>'required',
+            'code' =>'required',
              'country_id'=>'required|exists:countries,id'
         ]);
         if ($validator->fails())
@@ -57,12 +57,11 @@ class CityController extends BaseController
         $city = City::create([
             'name' => $request->name,
             'name_en'=>$request->name_en,
-            'city_num' =>$request->city_num,
+            'code' =>$request->code,
             'country_id' => $request->country_id,
           ]);
 
-         // return new CountryResource($country);
-         $success['countries']=New CityResource($city);
+         $success['cities']=New CityResource($city);
         $success['status']= 200;
 
          return $this->sendResponse($success,'تم إضافة مدينة بنجاح','City Added successfully');
@@ -78,7 +77,7 @@ class CityController extends BaseController
          }
 
 
-        $success['$cities']=New CityResource($city);
+        $success['cities']=New CityResource($city);
         $success['status']= 200;
 
          return $this->sendResponse($success,'تم  عرض بنجاح','city showed successfully');
@@ -97,7 +96,7 @@ class CityController extends BaseController
         else{
         $city->update(['status' => 'active']);
         }
-        $success['$cities']=New CityResource($city);
+        $success['cities']=New CityResource($city);
         $success['status']= 200;
 
          return $this->sendResponse($success,'تم تعديل حالة المدينه بنجاح','city updated successfully');
@@ -130,7 +129,7 @@ class CityController extends BaseController
         $validator =  Validator::make($input ,[
              'name'=>'required|string|max:255',
             'name_en'=>'required|string|max:255',
-            'city_num' =>'required',
+            'code' =>'required',
              'country_id'=>'required|exists:countries,id'
         ]);
         if ($validator->fails())
@@ -141,10 +140,10 @@ class CityController extends BaseController
         $city->update([
             'name' => $request->input('name'),
             'name_en' => $request->input('name_en'),
-            'city_num' => $request->input('city_num'),
+            'code' => $request->input('code'),
             'country_id' => $request->input('country_id')
         ]);
-       //$country->fill($request->post())->update();
+       
         $success['cities']=New CityResource($city);
         $success['status']= 200;
 

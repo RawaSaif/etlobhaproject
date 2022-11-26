@@ -27,6 +27,10 @@ Route::post('changeUnitStatus/{id}', [App\Http\Controllers\api\adminDashboard\Un
 Route::post('changeVideoStatus/{id}', [App\Http\Controllers\api\adminDashboard\VideoController::class,'changeStatus']);
 
 
+Route::post('changeActivityStatus/{id}',[App\Http\Controllers\api\adminDashboard\ActivityController::class,'changeStatus']);
+Route::post('changePlatformStatus/{id}',[App\Http\Controllers\api\adminDashboard\PlatformController::class,'changeStatus']);
+Route::post('changeServiceStatus/{id}', [App\Http\Controllers\api\adminDashboard\ServiceController::class,'changeStatus']);
+
 
 Route::resource('country',App\Http\Controllers\api\adminDashboard\CountryController::class);
 Route::resource('city',App\Http\Controllers\api\adminDashboard\CityController::class);
@@ -35,3 +39,6 @@ Route::resource('explainVideos',App\Http\Controllers\api\adminDashboard\ExplainV
 Route::resource('course',App\Http\Controllers\api\adminDashboard\CourseController::class);
 Route::resource('unit',App\Http\Controllers\api\adminDashboard\UnitController::class);
 Route::resource('video',App\Http\Controllers\api\adminDashboard\VideoController::class);
+Route::resource('activity',App\Http\Controllers\api\adminDashboard\ActivityController::class);
+Route::resource('platform',App\Http\Controllers\api\adminDashboard\PlatformController::class);
+Route::resource('service',App\Http\Controllers\api\adminDashboard\ServiceController::class);

@@ -18,4 +18,23 @@ class Service extends Model
     //     'user_id'
     //     );
     // }
+    public function setFileAttribute($file)
+    {
+        if (!is_null($file)) {
+            if (gettype($file) != 'string') {
+                $i = $file->store('images/service', 'public');
+                $this->attributes['file'] = $file->hashName();
+            } else {
+                $this->attributes['file'] = $file;
+            }
+        }
+    }
+
+    public function getFileAttribute($file)
+    {
+        if (is_null($file)) {
+            return   asset('assets/media/man.png');
+        }
+        return asset('storage/images/service') . '/' . $file;
+    }
 }
