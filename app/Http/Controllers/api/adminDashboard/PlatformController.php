@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api\adminDashboard;
+
 
 use App\Models\Platform;
 use Illuminate\Http\Request;
