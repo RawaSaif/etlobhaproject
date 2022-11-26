@@ -4,6 +4,8 @@ namespace App\Http\Controllers\api\adminDashboard;
 
 use App\Models\Activity;
 use Illuminate\Http\Request;
+use App\Http\Resources\ActivityResource;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\api\BaseController as BaseController;
 
 class ActivityController extends BaseController
@@ -15,7 +17,10 @@ class ActivityController extends BaseController
      */
     public function index()
     {
-        //
+        $success['Activities']=ActivityResource::collection(Activity::where('is_deleted',0)->get());
+        $success['status']= 200;
+
+         return $this->sendResponse($success,'تم ارجاع جميع الانشطة بنجاح','Activities return successfully'); 
     }
 
     /**
@@ -36,7 +41,23 @@ class ActivityController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validator =  Validator::make($input ,[
+            'name'=>'required|string|max:255'
+        ]);
+        if ($validator->fails())
+        {
+            return $this->sendError(null,$validator->errors());
+        }
+        $activity = Activity::create([
+            'name' => $request->name,
+          ]);
+
+        
+         $success['activities']=New ActivityResource($activity );
+        $success['status']= 200;
+
+         return $this->sendResponse($success,'تم إضافة النشاط بنجاح','Activity Added successfully');
     }
 
     /**
@@ -45,9 +66,33 @@ class ActivityController extends BaseController
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function show(Activity $activity)
+    public function show($activity)
     {
-        //
+        $activity= Activity::query()->find($activity);
+        if ($activity->is_deleted==1){
+               return $this->sendError("النشاط غير موجودة","Activity is't exists");
+               }
+              $success['activities']=New ActivityResource($activity);
+              $success['status']= 200;
+      
+               return $this->sendResponse($success,'تم عرض النشاط بنجاح','Activity showed successfully');
+    }
+    public function changeStatus($id)
+    {
+        $activity = Activity::query()->find($id);
+        if ($activity->is_deleted==1){
+         return $this->sendError("النشاط غير موجودة","Activity is't exists");
+         }
+        if($activity->status === 'active'){
+            $activity->update(['status' => 'not_active']);
+     }
+    else{
+        $activity->update(['status' => 'active']);
+    }
+        $success['activities']=New ActivityResource($activity);
+        $success['status']= 200;
+         return $this->sendResponse($success,'تم تعدبل حالة النشاط بنجاح',' Activity status updared successfully');
+
     }
 
     /**
@@ -70,7 +115,28 @@ class ActivityController extends BaseController
      */
     public function update(Request $request, Activity $activity)
     {
-        //
+        if ($activity->is_deleted==1){
+            return $this->sendError("النشاط غير موجودة"," Activity is't exists");
+       }
+            $input = $request->all();
+           $validator =  Validator::make($input ,[
+                'name'=>'required|string|max:255'
+          
+           ]);
+           if ($validator->fails())
+           {
+               # code...
+               return $this->sendError(null,$validator->errors());
+           }
+           $activity->update([
+               'name' => $request->input('name'),
+              
+           ]);
+          
+           $success['activities']=New ActivityResource($activity);
+           $success['status']= 200;
+   
+            return $this->sendResponse($success,'تم التعديل بنجاح','Activity updated successfully');
     }
 
     /**
@@ -79,8 +145,17 @@ class ActivityController extends BaseController
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Activity $activity)
+    public function destroy($activity)
     {
-        //
+        $activity =Activity::query()->find($activity);
+        if ($activity->is_deleted==1){
+            return $this->sendError("النشاط غير موجودة","activity is't exists");
+            }
+           $activity->update(['is_deleted' => 1]);
+   
+           $success['activities']=New ActivityResource($activity);
+           $success['status']= 200;
+   
+            return $this->sendResponse($success,'تم حذف النشاط بنجاح','Activity deleted successfully');
     }
 }
