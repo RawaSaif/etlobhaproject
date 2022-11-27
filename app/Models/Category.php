@@ -23,4 +23,23 @@ class Category extends Model
     {
         return $this->belongsTo(Store::class, 'store_id','id');
     }
+    public function setIconAttribute($icon)
+    {
+        if (!is_null($icon)) {
+            if (gettype($icon) != 'string') {
+                $i = $icon->store('images/icon/category', 'public');
+                $this->attributes['icon'] = $icon->hashName();
+            } else {
+                $this->attributes['icon'] = $icon;
+            }
+        }
+    }
+
+    public function getIconAttribute($icon)
+    {
+        if (is_null($icon)) {
+            return   asset('assets/media/man.png');
+        }
+        return asset('storage/images/icon/category') . '/' . $icon;
+    }
 }

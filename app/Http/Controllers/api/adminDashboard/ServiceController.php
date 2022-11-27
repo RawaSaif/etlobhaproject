@@ -160,7 +160,7 @@ class ServiceController extends BaseController
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy($service)
     {
         $service = Service::query()->find($service);
         if ($service->is_deleted==1){

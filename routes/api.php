@@ -33,3 +33,4 @@ Route::resource('marketer',App\Http\Controllers\api\adminDashboard\MarketerContr
 Route::resource('activity',App\Http\Controllers\api\adminDashboard\ActivityController::class);
 Route::resource('platform',App\Http\Controllers\api\adminDashboard\PlatformController::class);
 Route::resource('service',App\Http\Controllers\api\adminDashboard\ServiceController::class);
+Route::resource('category',App\Http\Controllers\api\adminDashboard\CategoryController::class);
