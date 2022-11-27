@@ -16,6 +16,7 @@ class CourseController extends BaseController
      */
     public function index()
     {
+        
        $success['courses']=CourseResource::collection(Course::where('is_deleted',0)->get());
         $success['status']= 200;
 
@@ -48,7 +49,7 @@ class CourseController extends BaseController
             'name'=>'required|string|max:255',
             'description'=>'required|string',
             'duration' =>'required',
-             'user_id'=>'required|exists:users,id'
+            //  'user_id'=>'required|exists:users,id'
         ]);
         if ($validator->fails())
         {
@@ -58,8 +59,8 @@ class CourseController extends BaseController
             'name' => $request->name,
             'description'=>$request->description,
             'duration' =>$request->duration,
-            'tags' =>$request->tags,
-            'user_id' => $request->user_id,
+            'tags' =>implode(',', $request->tags),
+            // 'user_id' => $request->user_id,
           ]);
 
          // return new CountryResource($country);

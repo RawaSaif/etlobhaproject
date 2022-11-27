@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     use HasFactory;
-    protected $fillable = ['video','unit_id','status','is_deleted'];
+    protected $fillable = ['video','duration','unit_id','status','is_deleted'];
     public function unit()
     {
         return $this->belongsTo(Unit::class);
@@ -33,4 +33,15 @@ class Video extends Model
         }
         return asset('storage/videos/video') . '/' . $video;
     }
+
+      public function getVideoDuration($video)
+    {
+        $getID3 = new \getID3();
+        $pathVideo = 'storage/videos/' . $video;
+        $fileAnalyze = $getID3->analyze($pathVideo);
+        $playtime = $fileAnalyze['playtime_string'];
+
+        return $playtime;
+    }
+    
 }

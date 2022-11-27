@@ -53,12 +53,24 @@ class VideoController extends BaseController
         {
             return $this->sendError(null,$validator->errors());
         }
+
+           $fileName = $request->video->getClientOriginalName();
+         $getID3 = new \getID3();
+        $pathVideo = 'storage/videos/' .$fileName;
+        
+        $fileAnalyze = $getID3->analyze($pathVideo);
+        dd($fileAnalyze);
+        $playtime = $fileAnalyze['playtime_string'];
+
+    //    $duration=getVideoDuration($video);
         $video = Video::create([
             'video' => $request->video,
-
+            'duration' => $playtime,
             'unit_id'=>$request->unit_id,
 
           ]);
+
+
 
          // return new CountryResource($country);
          $success['videos']=New VideoResource($video);
@@ -82,7 +94,7 @@ class VideoController extends BaseController
          }
 
 
-        $success['$videos']=New VideoResource($video);
+        $success['videos']=New VideoResource($video);
         $success['status']= 200;
 
          return $this->sendResponse($success,'تم عرض بنجاح','video showed successfully');
@@ -148,7 +160,7 @@ class VideoController extends BaseController
         else{
         $video->update(['status' => 'active']);
         }
-        $success['$videos']=New VideoResource($video);
+        $success['videos']=New VideoResource($video);
         $success['status']= 200;
 
          return $this->sendResponse($success,'تم تعديل حالة الفيديو بنجاح','video updated successfully');

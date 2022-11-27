@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->string('video');
+            $table->time('duration');
             $table->unsignedBigInteger('unit_id')->nullable();
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->enum('status',['active','not_active'])->default('active');
