@@ -19,7 +19,7 @@ class CategoryController extends BaseController
         $success['categories']=CategoryResource::collection(Category::where('is_deleted',0)->get());
         $success['status']= 200;
 
-         return $this->sendResponse($success,'تم ارجاع جميع التصنيفات بنجاح','categories return successfully'); 
+         return $this->sendResponse($success,'تم ارجاع جميع التصنيفات بنجاح','categories return successfully');
     }
 
     /**
@@ -29,7 +29,7 @@ class CategoryController extends BaseController
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -40,9 +40,9 @@ class CategoryController extends BaseController
      */
     public function store(Request $request)
     {
-       
+
         if($request->parent_id == null){
-            
+
             $input = $request->all();
             $validator =  Validator::make($input ,[
                 'name'=>'required|string|max:255',
@@ -53,16 +53,16 @@ class CategoryController extends BaseController
             {
                 return $this->sendError(null,$validator->errors());
             }
-            
-            $number=Category::orderBy('id', 'desc')->first();
-        if(is_null($number)){
+
+            $cat=Category::orderBy('id', 'desc')->first();
+        if(is_null($cat)){
           $number = 0001;
         }else{
 
-          $number=$number->number;
+          $number=$cat->number;
           $number= ((int) $number) +1;
         }
-    
+
             $category =Category::create([
                 'name' => $request->name,
                 'number'=> str_pad($number, 4, '0', STR_PAD_LEFT),
@@ -71,7 +71,7 @@ class CategoryController extends BaseController
                 'for'=>$request->for,
                 'store_id'=> $request->store_id,
               ]);
-              
+
         }
         else{
 
@@ -85,27 +85,28 @@ class CategoryController extends BaseController
             {
                 return $this->sendError(null,$validator->errors());
             }
-            
-            $number=Category::orderBy('id', 'desc')->first();
-        if(is_null($number)){
+
+            $cat=Category::orderBy('id', 'desc')->first();
+        if(is_null($cat)){
           $number = 0001;
         }else{
 
-          $number=$number->number;
+          $number=$cat->number;
           $number= ((int) $number) +1;
         }
-    
+
+
             $category =Category::create([
                 'name' => $request->name,
                 'number'=> str_pad($number, 4, '0', STR_PAD_LEFT),
                 'parent_id'=>$request->parent_id,
                 'for'=>$request->for,
-                'store_id'=> $request->store_id,
+                'store_id'=>$request->store_id,
               ]);
 
-            
+
     }
-    $success['categories']=New CategoryResource($category );
+    $success['categories']=New CategoryResource($category);
     $success['status']= 200;
 
      return $this->sendResponse($success,'تم إضافة التصنيف بنجاح','Category Added successfully');
@@ -124,17 +125,17 @@ class CategoryController extends BaseController
                }
               $success['categories']=New CategoryResource($category);
               $success['status']= 200;
-      
+
                return $this->sendResponse($success,'تم عرض القسم بنجاح','Category showed successfully');
     }
 
      public function children($parnet)
     {
         $category= Category::where('parent_id',$parnet)->where('is_deleted',0)->get();
-       
+
               $success['categories']=New CategoryResource($category);
               $success['status']= 200;
-      
+
                return $this->sendResponse($success,'تم عرض الاقسام الفرعية بنجاح','sub_Category showed successfully');
     }
 
@@ -179,13 +180,13 @@ class CategoryController extends BaseController
             return $this->sendError("التصنيف غير موجودة"," Category is't exists");
        }
         if($request->parent_id == null){
-       
+
             $input = $request->all();
            $validator =  Validator::make($input ,[
             'name'=>'required|string|max:255',
             'icon'=>['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
             'for'=>'required',
-          
+
            ]);
            if ($validator->fails())
            {
@@ -205,7 +206,7 @@ class CategoryController extends BaseController
              'name'=>'required|string|max:255',
              'for'=>'required',
              'parent_id'=>'required'
-           
+
             ]);
             if ($validator->fails())
             {
@@ -220,10 +221,10 @@ class CategoryController extends BaseController
                 'store_id' =>$request->input('store_id')
             ]);
            }
-          
+
            $success['categories']=New CategoryResource($category);
            $success['status']= 200;
-   
+
             return $this->sendResponse($success,'تم التعديل بنجاح','Category updated successfully');
     }
 
@@ -240,7 +241,7 @@ class CategoryController extends BaseController
             return $this->sendError("القسم غير موجودة","category is't exists");
             }
            $category->update(['is_deleted' => 1]);
-   
+
            $success['activities']=New CategoryResource($category);
            $success['status']= 200;
             return $this->sendResponse($success,'تم حذف القسم بنجاح','category deleted successfully');
