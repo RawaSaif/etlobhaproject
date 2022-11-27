@@ -14,7 +14,7 @@ class Notification extends Model
 
     public function notification_type()
     {
-        return $this->belongsTo(Notification_type::class,'notificationtype_id','id');
+        return $this->hasOne(Notification_type::class,'notificationtype_id','id');
     }
 
      public function user()
