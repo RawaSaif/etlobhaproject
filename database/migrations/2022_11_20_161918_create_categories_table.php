@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('number')->generatedAs(); //solution
+            $table->string('number')->unique();
             $table->string('name');
             $table->string('icon');
             $table->integer('parent_id')->nullable();
