@@ -6,6 +6,7 @@ use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\VideoResource;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\api\BaseController as BaseController;
 class VideoController extends BaseController
 {
@@ -44,7 +45,6 @@ class VideoController extends BaseController
         $input = $request->all();
         $validator =  Validator::make($input ,[
             'video'=>'required|mimes:mp4,ogx,oga,ogv,ogg,webm',
-
             'unit_id' =>'required|exists:units,id'
 
 
@@ -54,25 +54,45 @@ class VideoController extends BaseController
             return $this->sendError(null,$validator->errors());
         }
 
-           $fileName = $request->video->getClientOriginalName();
-         $getID3 = new \getID3();
-        $pathVideo = 'storage/videos/' .$fileName;
-        
-        $fileAnalyze = $getID3->analyze($pathVideo);
-        dd($fileAnalyze);
-        $playtime = $fileAnalyze['playtime_string'];
+        //    $fileName = $request->video->getClientOriginalName();
+        // $getID3 = new \getID3();
+        // $pathVideo = 'storage/videos/'. $fileName;
+
+        // $fileAnalyze = $getID3->analyze($pathVideo);
+        // // dd($fileAnalyze);
+        // $playtime = $fileAnalyze['playtime_string'];
 
     //    $duration=getVideoDuration($video);
-        $video = Video::create([
-            'video' => $request->video,
-            'duration' => $playtime,
-            'unit_id'=>$request->unit_id,
+        // $video = Video::create([
+        //     'video' => $request->video,
+        //     'duration' => $playtime,
+        //     // 'unit_id'=>$request->unit_id,
 
-          ]);
+        //   ]);
+        $fileName = $request->video->getClientOriginalName();
+        $filePath = 'videos/' . $fileName;
+
+        $isFileUploaded = Storage::disk('public')->put($filePath, file_get_contents($request->video));
+
+        // File URL to access the video in frontend
+        $url = Storage::disk('public')->url($filePath);
+    $getID3 = new \getID3();
+        $pathVideo = 'storage/videos/'. $fileName;
+
+        $fileAnalyze = $getID3->analyze($pathVideo);
+        // dd($fileAnalyze);
+        $playtime = $fileAnalyze['playtime_string'];
+        // dd($playtime);
+        if ($isFileUploaded) {
+            $video = new Video();
+
+            $video->duration=$playtime;
+            $video->video = $filePath;
+            $video->unit_id=$request->unit_id;
+            $video->save();}
 
 
-
-         // return new CountryResource($country);
+         
          $success['videos']=New VideoResource($video);
         $success['status']= 200;
 

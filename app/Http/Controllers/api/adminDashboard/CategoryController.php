@@ -20,7 +20,7 @@ class CategoryController extends BaseController
         $success['categories']=CategoryResource::collection(Category::where('is_deleted',0)->get());
         $success['status']= 200;
 
-         return $this->sendResponse($success,'تم ارجاع جميع التصنيفات بنجاح','categories return successfully'); 
+         return $this->sendResponse($success,'تم ارجاع جميع التصنيفات بنجاح','categories return successfully');
     }
 
     /**
@@ -30,7 +30,7 @@ class CategoryController extends BaseController
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -41,7 +41,7 @@ class CategoryController extends BaseController
      */
     public function store(Request $request)
     {
-       
+
         if($request->parent_id == null){
             $input = $request->all();
             $validator =  Validator::make($input ,[
@@ -55,13 +55,13 @@ class CategoryController extends BaseController
             }
             $category =Category::create([
                 'name' => $request->name,
-                'number'=> str_pad($request->id, 4, '0', STR_PAD_LEFT),
+                
                 'icon' => $request->icon,
                 'parent_id'=>$request->parent_id,
                 'for'=>$request->for,
                 'store_id'=> $request->store_id,
               ]);
-              
+
         }
         else{
     }
