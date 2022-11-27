@@ -155,7 +155,6 @@ class ActivityController extends BaseController
    
            $success['activities']=New ActivityResource($activity);
            $success['status']= 200;
-   
             return $this->sendResponse($success,'تم حذف النشاط بنجاح','Activity deleted successfully');
     }
 }
