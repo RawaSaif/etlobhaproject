@@ -54,12 +54,12 @@ class CategoryController extends BaseController
                 return $this->sendError(null,$validator->errors());
             }
 
-            $number=Category::orderBy('id', 'desc')->first();
-        if(is_null($number)){
+            $cat=Category::orderBy('id', 'desc')->first();
+        if(is_null($cat)){
           $number = 0001;
         }else{
 
-          $number=$number->number;
+          $number=$cat->number;
           $number= ((int) $number) +1;
         }
 
@@ -86,26 +86,27 @@ class CategoryController extends BaseController
                 return $this->sendError(null,$validator->errors());
             }
 
-            $number=Category::orderBy('id', 'desc')->first();
-        if(is_null($number)){
+            $cat=Category::orderBy('id', 'desc')->first();
+        if(is_null($cat)){
           $number = 0001;
         }else{
 
-          $number=$number->number;
+          $number=$cat->number;
           $number= ((int) $number) +1;
         }
+
 
             $category =Category::create([
                 'name' => $request->name,
                 'number'=> str_pad($number, 4, '0', STR_PAD_LEFT),
                 'parent_id'=>$request->parent_id,
                 'for'=>$request->for,
-                'store_id'=> $request->store_id,
+                'store_id'=>$request->store_id,
               ]);
 
 
     }
-    $success['categories']=New CategoryResource($category );
+    $success['categories']=New CategoryResource($category);
     $success['status']= 200;
 
      return $this->sendResponse($success,'تم إضافة التصنيف بنجاح','Category Added successfully');
