@@ -84,7 +84,7 @@ class ServiceController extends BaseController
        $success['services']=New ServiceResource($service);
        $success['status']= 200;
 
-        return $this->sendResponse($success,'تم الخدمة عرض بنجاح','service showed successfully');
+        return $this->sendResponse($success,'تم عرض الخدمة  بنجاح','service showed successfully');
     }
     public function changeStatus($id)
     {
