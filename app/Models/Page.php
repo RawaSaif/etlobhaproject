@@ -17,7 +17,7 @@ class Page extends Model
     {
       
        return $this->belongsToMany(
-        page_category::class,
+        Page_category::class,
             'pages_page_categories',
             'page_id',
             'page_category_id'

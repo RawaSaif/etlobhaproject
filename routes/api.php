@@ -44,3 +44,5 @@ Route::resource('service',App\Http\Controllers\api\adminDashboard\ServiceControl
 
 Route::resource('category',App\Http\Controllers\api\adminDashboard\CategoryController::class);
 
+Route::resource('page',App\Http\Controllers\api\adminDashboard\pageController::class);
+Route::resource('pagecategory',App\Http\Controllers\api\adminDashboard\PageCategoryController::class);
