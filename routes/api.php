@@ -29,6 +29,13 @@ Route::post('changeActivityStatus/{id}',[App\Http\Controllers\api\adminDashboard
 Route::post('changePlatformStatus/{id}',[App\Http\Controllers\api\adminDashboard\PlatformController::class,'changeStatus']);
 Route::post('changeServiceStatus/{id}', [App\Http\Controllers\api\adminDashboard\ServiceController::class,'changeStatus']);
 Route::post('changeCategoryStatus/{id}', [App\Http\Controllers\api\adminDashboard\CategoryController::class,'changeStatus']);
+Route::post('changeShippingtypeStatus/{id}', [App\Http\Controllers\api\adminDashboard\ShippingtypeController::class,'changeStatus']);
+Route::post('changePaymenttypeStatus/{id}', [App\Http\Controllers\api\adminDashboard\PaymenttypeController::class,'changeStatus']);
+Route::post('changeCommentStatus/{id}', [App\Http\Controllers\api\adminDashboard\CommentController::class,'changeStatus']);
+Route::post('changeReplaycommentStatus/{id}', [App\Http\Controllers\api\adminDashboard\ReplaycommentController::class,'changeStatus']);
+Route::post('changeMaintenanceStatus/{id}', [App\Http\Controllers\api\adminDashboard\MaintenanceController::class,'changeStatus']);
+Route::post('changePageStatus/{id}', [App\Http\Controllers\api\adminDashboard\PageController::class,'changeStatus']);
+Route::post('changePageCategoryStatus/{id}', [App\Http\Controllers\api\adminDashboard\PageCategoryController::class,'changeStatus']);
 
 
 Route::resource('country',App\Http\Controllers\api\adminDashboard\CountryController::class);
@@ -41,8 +48,11 @@ Route::resource('video',App\Http\Controllers\api\adminDashboard\VideoController:
 Route::resource('activity',App\Http\Controllers\api\adminDashboard\ActivityController::class);
 Route::resource('platform',App\Http\Controllers\api\adminDashboard\PlatformController::class);
 Route::resource('service',App\Http\Controllers\api\adminDashboard\ServiceController::class);
-
 Route::resource('category',App\Http\Controllers\api\adminDashboard\CategoryController::class);
-
+Route::resource('shippingtype',App\Http\Controllers\api\adminDashboard\ShippingtypeController::class);
+Route::resource('paymenttype',App\Http\Controllers\api\adminDashboard\PaymenttypeController::class);
+Route::resource('comment',App\Http\Controllers\api\adminDashboard\CommentController::class);
+Route::resource('replaycomment',App\Http\Controllers\api\adminDashboard\ReplaycommentController::class);
+Route::resource('maintenance',App\Http\Controllers\api\adminDashboard\MaintenanceController::class);
 Route::resource('page',App\Http\Controllers\api\adminDashboard\pageController::class);
 Route::resource('pagecategory',App\Http\Controllers\api\adminDashboard\PageCategoryController::class);

@@ -45,7 +45,7 @@ class MaintenanceController extends BaseController
         $validator =  Validator::make($input ,[
             'title'=>'required|string|max:255',
             'message'=>'required',
-            'store_id'=>'required|exists:stores,id'
+           // 'store_id'=>'required|exists:stores,id'
         ]);
         if ($validator->fails())
         {
@@ -113,7 +113,7 @@ class MaintenanceController extends BaseController
 
 
 
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -128,9 +128,9 @@ class MaintenanceController extends BaseController
        }
             $input = $request->all();
            $validator =  Validator::make($input ,[
-                'name'=>'required|string|max:255',
+                'title'=>'required|string|max:255',
                 'message'=>'required',
-                'store_id'=>'required|exists:stores,id'
+               // 'store_id'=>'required|exists:stores,id'
 
            ]);
            if ($validator->fails())
@@ -139,7 +139,7 @@ class MaintenanceController extends BaseController
                return $this->sendError(null,$validator->errors());
            }
            $maintenance->update([
-               'name' => $request->input('name'),
+               'title' => $request->input('title'),
                'message' => $request->input('message'),
                 'store_id' => $request->input('store_id'),
            ]);

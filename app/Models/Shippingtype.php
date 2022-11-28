@@ -25,4 +25,5 @@ class Shippingtype extends Model
 
 
 
+
 }

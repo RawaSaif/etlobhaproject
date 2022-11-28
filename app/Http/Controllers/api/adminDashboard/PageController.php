@@ -17,7 +17,7 @@ class PageController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index()
     {
         $success['pages']=PageResource::collection(Page::where('is_deleted',0)->get());
         $success['status']= 200;
@@ -52,8 +52,8 @@ class PageController extends BaseController
             'seo_desc'=>'required',
             'tags'=>'required',
             // 'store_id'=>'required|exists:stores,id',
-            
-            
+
+
         ]);
         if ($validator->fails())
         {
@@ -94,7 +94,7 @@ class PageController extends BaseController
 
                return $this->sendResponse($success,'تم عرض الصفحة بنجاح','Page showed successfully');
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -106,22 +106,7 @@ class PageController extends BaseController
     {
         //
     }
-    public function changeStatus($id)
-    {
-        $page = Page::query()->find($id);
-        if ($page->is_deleted==1){
-         return $this->sendError("الصفحة غير موجودة","page is't exists");
-         }
-        if($page->status === 'active'){
-            $page->update(['status' => 'not_active']);
-     }
-    else{
-        $page->update(['status' => 'active']);
-    }
-        $success['pages']=New PageResource($page);
-        $success['status']= 200;
-       
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -135,6 +120,7 @@ class PageController extends BaseController
         if ($page->is_deleted==1){
             return $this->sendError("الصفحة غير موجودة","Page is't exists");
        }
+
             $input = $request->all();
            $validator =  Validator::make($input ,[
             'title'=>'required|string|max:255',
@@ -159,7 +145,9 @@ class PageController extends BaseController
                'tags' => implode(',',$request->input('tags')),
            ]);
            //$request->input('name', []);
+           if($request->name!=null){
            $page->page_categories()->sync(explode(',', $request->name));
+           }
            $success['pages']=New PageResource($page);
            $success['status']= 200;
 
@@ -185,4 +173,26 @@ class PageController extends BaseController
 
             return $this->sendResponse($success,'تم حذف الصفحة بنجاح','page deleted successfully');
     }
+
+      public function changeStatus($id)
+    {
+        $page = Page::query()->find($id);
+         if ($page->is_deleted==1){
+         return $this->sendError("  الصفحة غير موجودة","page is't exists");
+         }
+
+        if($page->status === 'active'){
+        $page->update(['status' => 'not_active']);
+        }
+        else{
+        $page->update(['status' => 'active']);
+        }
+        $success['pages']=New PageResource($page);
+        $success['status']= 200;
+
+         return $this->sendResponse($success,'تم تعديل حالة الصفحة بنجاح','page updated successfully');
+
+
+    }
+
 }

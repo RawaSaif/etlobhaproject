@@ -76,7 +76,7 @@ class VideoController extends BaseController
 
         // File URL to access the video in frontend
         $url = Storage::disk('public')->url($filePath);
-    $getID3 = new \getID3();
+        $getID3 = new \getID3();
         $pathVideo = 'storage/videos/'. $fileName;
 
         $fileAnalyze = $getID3->analyze($pathVideo);
@@ -92,7 +92,7 @@ class VideoController extends BaseController
             $video->save();}
 
 
-         
+
          $success['videos']=New VideoResource($video);
         $success['status']= 200;
 
@@ -145,7 +145,7 @@ class VideoController extends BaseController
           }
          $input = $request->all();
          $validator =  Validator::make($input ,[
-        'video'=>'required|mimes:mp4,ogx,oga,ogv,ogg,webm',
+         'video'=>'required|mimes:mp4,ogx,oga,ogv,ogg,webm',
 
             'unit_id' =>'required|exists:units,id'
          ]);
@@ -154,18 +154,34 @@ class VideoController extends BaseController
             # code...
             return $this->sendError(null,$validator->errors());
          }
+          $fileName = $request->video->getClientOriginalName();
+        $filePath = 'videos/' . $fileName;
+
+        $isFileUploaded = Storage::disk('public')->put($filePath, file_get_contents($request->video));
+
+        // File URL to access the video in frontend
+        $url = Storage::disk('public')->url($filePath);
+        $getID3 = new \getID3();
+        $pathVideo = 'storage/videos/'. $fileName;
+
+        $fileAnalyze = $getID3->analyze($pathVideo);
+        // dd($fileAnalyze);
+        $playtime = $fileAnalyze['playtime_string'];
+        if ($isFileUploaded) {
+
          $video->update([
             'video' => $request->input('video'),
             'unit_id' => $request->input('unit_id'),
 
 
          ]);
+        }
          //$country->fill($request->post())->update();
             $success['videos']=New VideoResource($video);
             $success['status']= 200;
 
             return $this->sendResponse($success,'تم التعديل بنجاح','video updated successfully');
-        }
+    }
 
   public function changeStatus($id)
     {
