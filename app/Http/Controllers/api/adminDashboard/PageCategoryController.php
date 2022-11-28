@@ -77,22 +77,7 @@ class PageCategoryController extends BaseController
 
                return $this->sendResponse($success,'تم عرض التصنيف بنجاح','Page_category showed successfully');
     }
-    public function changeStatus($id)
-    {
-        $page_category = Page_category::query()->find($id);
-        if ($page_category->is_deleted==1){
-         return $this->sendError("التصنيف غير موجودة","page_category is't exists");
-         }
-        if($page_category->status === 'active'){
-            $page_category->update(['status' => 'not_active']);
-     }
-    else{
-        $page_category->update(['status' => 'active']);
-    }
-        $success['Page_categories']=New Page_categoryResource($page_category);
-        $success['status']= 200;
-       
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -112,32 +97,31 @@ class PageCategoryController extends BaseController
      * @param  \App\Models\page_category  $page_category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Page_category $page_category)
+    public function update(Request $request,  $page_category)
     {
+        $page_category =Page_category::query()->find($page_category);
         if ($page_category->is_deleted==1){
-            return $this->sendError("االتصنبف غير موجودة","Page_category is't exists");
-       }
-            $input = $request->all();
-           $validator =  Validator::make($input ,[
-                'name'=>'required|string|max:255'
+         return $this->sendError("شركة الشحن غير موجودة","page_category is't exists");
+          }
+         $input = $request->all();
+         $validator =  Validator::make($input ,[
+          'name'=>'required|string|max:255',
+         ]);
+         if ($validator->fails())
+         {
+            # code...
+            return $this->sendError(null,$validator->errors());
+         }
+         $page_category->update([
+            'name' => $request->input('name')
 
-           ]);
-           if ($validator->fails())
-           {
-               # code...
-               return $this->sendError(null,$validator->errors());
-           }
-           $page_category->update([
-               'name' => $request->input('name'),
+         ]);
 
-           ]);
+            $success['page_categorys']=New Page_categoryResource($page_category);
+            $success['status']= 200;
 
-           $success['page_categories']=New Page_categoryResource($page_category);
-           $success['status']= 200;
-
-            return $this->sendResponse($success,'تم التعديل بنجاح','Category updated successfully');
-    }
-
+            return $this->sendResponse($success,'تم التعديل بنجاح','page_category updated successfully');
+        }
     /**
      * Remove the specified resource from storage.
      *
@@ -157,4 +141,26 @@ class PageCategoryController extends BaseController
 
             return $this->sendResponse($success,'تم حذف التصنيف بنجاح','page_category deleted successfully');
     }
+
+     public function changeStatus($id)
+    {
+        $page_category = Page_category::query()->find($id);
+         if ($page_category->is_deleted==1){
+         return $this->sendError("التصنيف غير موجودة","page_category is't exists");
+         }
+
+        if($page_category->status === 'active'){
+        $page_category->update(['status' => 'not_active']);
+        }
+        else{
+        $page_category->update(['status' => 'active']);
+        }
+        $success['page_categories']=New Page_categoryResource($page_category);
+        $success['status']= 200;
+
+         return $this->sendResponse($success,'تم تعديل حالة التصنيف بنجاح','page_category updated successfully');
+
+
+    }
 }
+

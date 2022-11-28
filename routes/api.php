@@ -33,6 +33,9 @@ Route::post('changeShippingtypeStatus/{id}', [App\Http\Controllers\api\adminDash
 Route::post('changePaymenttypeStatus/{id}', [App\Http\Controllers\api\adminDashboard\PaymenttypeController::class,'changeStatus']);
 Route::post('changeCommentStatus/{id}', [App\Http\Controllers\api\adminDashboard\CommentController::class,'changeStatus']);
 Route::post('changeReplaycommentStatus/{id}', [App\Http\Controllers\api\adminDashboard\ReplaycommentController::class,'changeStatus']);
+Route::post('changeMaintenanceStatus/{id}', [App\Http\Controllers\api\adminDashboard\MaintenanceController::class,'changeStatus']);
+Route::post('changePageStatus/{id}', [App\Http\Controllers\api\adminDashboard\PageController::class,'changeStatus']);
+Route::post('changePageCategoryStatus/{id}', [App\Http\Controllers\api\adminDashboard\PageCategoryController::class,'changeStatus']);
 
 
 Route::resource('country',App\Http\Controllers\api\adminDashboard\CountryController::class);
@@ -50,7 +53,6 @@ Route::resource('shippingtype',App\Http\Controllers\api\adminDashboard\Shippingt
 Route::resource('paymenttype',App\Http\Controllers\api\adminDashboard\PaymenttypeController::class);
 Route::resource('comment',App\Http\Controllers\api\adminDashboard\CommentController::class);
 Route::resource('replaycomment',App\Http\Controllers\api\adminDashboard\ReplaycommentController::class);
-
-
+Route::resource('maintenance',App\Http\Controllers\api\adminDashboard\MaintenanceController::class);
 Route::resource('page',App\Http\Controllers\api\adminDashboard\pageController::class);
 Route::resource('pagecategory',App\Http\Controllers\api\adminDashboard\PageCategoryController::class);
