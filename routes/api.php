@@ -52,3 +52,5 @@ Route::resource('comment',App\Http\Controllers\api\adminDashboard\CommentControl
 Route::resource('replaycomment',App\Http\Controllers\api\adminDashboard\ReplaycommentController::class);
 
 
+Route::resource('page',App\Http\Controllers\api\adminDashboard\pageController::class);
+Route::resource('pagecategory',App\Http\Controllers\api\adminDashboard\PageCategoryController::class);

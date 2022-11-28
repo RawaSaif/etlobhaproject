@@ -130,7 +130,7 @@ class CourseController extends BaseController
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'description' => $request->input('description'),
-            'tags' => $request->input('tags'),
+            'tags' =>implode(',',$request->input('tags')),
             'user_id' => $request->input('user_id')
         ]);
        //$country->fill($request->post())->update();
