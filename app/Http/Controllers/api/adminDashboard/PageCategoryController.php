@@ -101,7 +101,7 @@ class PageCategoryController extends BaseController
     {
         $page_category =Page_category::query()->find($page_category);
         if ($page_category->is_deleted==1){
-         return $this->sendError("شركة الشحن غير موجودة","page_category is't exists");
+         return $this->sendError("التصنيف غير موجودة","page_category is't exists");
           }
          $input = $request->all();
          $validator =  Validator::make($input ,[
@@ -163,4 +163,3 @@ class PageCategoryController extends BaseController
 
     }
 }
-
