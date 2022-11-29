@@ -46,7 +46,7 @@ class PlatformController extends BaseController
         $validator =  Validator::make($input ,[
             'name'=>'required|string|max:255',
             'logo'=>'required|string|max:255',
-            'link' =>'required',
+            'link' =>'required|url',
         ]);
         if ($validator->fails())
         {
@@ -132,7 +132,7 @@ class PlatformController extends BaseController
            $validator =  Validator::make($input ,[
                 'name'=>'required|string|max:255',
                'logo'=>'required|string|max:255',
-               'link' =>'required'
+               'link' =>'required|url'
            ]);
            if ($validator->fails())
            {
