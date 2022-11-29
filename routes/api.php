@@ -44,6 +44,7 @@ Route::post('changePlaneStatus/{id}', [App\Http\Controllers\api\adminDashboard\P
 Route::post('changePackageStatus/{id}', [App\Http\Controllers\api\adminDashboard\PackageController::class,'changeStatus']);
 Route::post('changeTemplateStatus/{id}', [App\Http\Controllers\api\adminDashboard\TemplateController::class,'changeStatus']);
 
+Route::post('changeCouponStatus/{id}', [App\Http\Controllers\api\adminDashboard\CouponController::class,'changeStatus']);
 
 Route::resource('country',App\Http\Controllers\api\adminDashboard\CountryController::class);
 Route::resource('city',App\Http\Controllers\api\adminDashboard\CityController::class);
@@ -70,3 +71,4 @@ Route::resource('homepage',App\Http\Controllers\api\adminDashboard\HomepageContr
 Route::resource('plan',App\Http\Controllers\api\adminDashboard\PlanController::class);
 Route::resource('package',App\Http\Controllers\api\adminDashboard\PackageController::class);
 Route::resource('template',App\Http\Controllers\api\adminDashboard\TemplateController::class);
+Route::resource('coupons',App\Http\Controllers\api\adminDashboard\CouponController::class);

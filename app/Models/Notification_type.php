@@ -11,5 +11,4 @@ class Notification_type extends Model
     protected $fillable = ['name','status','is_deleted'];
 
   
-
 }
