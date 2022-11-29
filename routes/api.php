@@ -38,6 +38,7 @@ Route::post('changePageStatus/{id}', [App\Http\Controllers\api\adminDashboard\Pa
 Route::post('changePageCategoryStatus/{id}', [App\Http\Controllers\api\adminDashboard\PageCategoryController::class,'changeStatus']);
 Route::post('changeCurrencyStatus/{id}', [App\Http\Controllers\api\adminDashboard\CurrencyController::class,'changeStatus']);
 Route::post('changewebsite_socialmediaStatus/{id}', [App\Http\Controllers\api\adminDashboard\WebsiteSocialmediaController::class,'changeStatus']);
+Route::post('changeHomepageStatus/{id}', [App\Http\Controllers\api\adminDashboard\HomepageController::class,'changeStatus']);
 
 
 Route::resource('country',App\Http\Controllers\api\adminDashboard\CountryController::class);
@@ -60,3 +61,4 @@ Route::resource('page',App\Http\Controllers\api\adminDashboard\pageController::c
 Route::resource('pagecategory',App\Http\Controllers\api\adminDashboard\PageCategoryController::class);
 Route::resource('currency',App\Http\Controllers\api\adminDashboard\CurrencyController::class);
 Route::resource('website_socialmedia',App\Http\Controllers\api\adminDashboard\WebsiteSocialmediaController::class);
+Route::resource('homepage',App\Http\Controllers\api\adminDashboard\HomepageController::class);
