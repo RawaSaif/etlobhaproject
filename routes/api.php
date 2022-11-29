@@ -45,6 +45,8 @@ Route::post('changePackageStatus/{id}', [App\Http\Controllers\api\adminDashboard
 Route::post('changeTemplateStatus/{id}', [App\Http\Controllers\api\adminDashboard\TemplateController::class,'changeStatus']);
 
 Route::post('changeCouponStatus/{id}', [App\Http\Controllers\api\adminDashboard\CouponController::class,'changeStatus']);
+Route::post('changeNotificationStatus/{id}', [App\Http\Controllers\api\adminDashboard\NotificationController::class,'changeStatus']);
+Route::post('changeNotification_typeStatus/{id}', [App\Http\Controllers\api\adminDashboard\Notification_typesController::class,'changeStatus']);
 
 Route::resource('country',App\Http\Controllers\api\adminDashboard\CountryController::class);
 Route::resource('city',App\Http\Controllers\api\adminDashboard\CityController::class);
@@ -72,3 +74,5 @@ Route::resource('plan',App\Http\Controllers\api\adminDashboard\PlanController::c
 Route::resource('package',App\Http\Controllers\api\adminDashboard\PackageController::class);
 Route::resource('template',App\Http\Controllers\api\adminDashboard\TemplateController::class);
 Route::resource('coupons',App\Http\Controllers\api\adminDashboard\CouponController::class);
+Route::resource('notification',App\Http\Controllers\api\adminDashboard\NotificationController::class);
+Route::resource('notification_type',App\Http\Controllers\api\adminDashboard\Notification_typesController::class);
