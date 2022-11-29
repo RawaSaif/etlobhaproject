@@ -40,6 +40,9 @@ Route::post('changeTechnicalSupportStatus/{id}', [App\Http\Controllers\api\admin
 Route::post('changeCurrencyStatus/{id}', [App\Http\Controllers\api\adminDashboard\CurrencyController::class,'changeStatus']);
 Route::post('changewebsite_socialmediaStatus/{id}', [App\Http\Controllers\api\adminDashboard\WebsiteSocialmediaController::class,'changeStatus']);
 Route::post('changeHomepageStatus/{id}', [App\Http\Controllers\api\adminDashboard\HomepageController::class,'changeStatus']);
+Route::post('changePlaneStatus/{id}', [App\Http\Controllers\api\adminDashboard\PlanController::class,'changeStatus']);
+Route::post('changePackageStatus/{id}', [App\Http\Controllers\api\adminDashboard\PackageController::class,'changeStatus']);
+Route::post('changeTemplateStatus/{id}', [App\Http\Controllers\api\adminDashboard\TemplateController::class,'changeStatus']);
 
 
 Route::resource('country',App\Http\Controllers\api\adminDashboard\CountryController::class);
@@ -64,3 +67,6 @@ Route::resource('technicalSupport',App\Http\Controllers\api\adminDashboard\Techn
 Route::resource('currency',App\Http\Controllers\api\adminDashboard\CurrencyController::class);
 Route::resource('website_socialmedia',App\Http\Controllers\api\adminDashboard\WebsiteSocialmediaController::class);
 Route::resource('homepage',App\Http\Controllers\api\adminDashboard\HomepageController::class);
+Route::resource('plan',App\Http\Controllers\api\adminDashboard\PlanController::class);
+Route::resource('package',App\Http\Controllers\api\adminDashboard\PackageController::class);
+Route::resource('template',App\Http\Controllers\api\adminDashboard\TemplateController::class);

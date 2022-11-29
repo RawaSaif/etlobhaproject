@@ -134,7 +134,7 @@ class ServiceController extends BaseController
             'name'=>'required|string|max:255',
             'description'=>'required|string',
             'file'=>'required',
-             'price'=>'required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/'
+             'price'=>'required|numeric|gt:0',
            ]);
            if ($validator->fails())
            {

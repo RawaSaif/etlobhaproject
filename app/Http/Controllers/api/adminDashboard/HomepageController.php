@@ -43,16 +43,17 @@ class HomepageController extends BaseController
     {
         $input = $request->all();
         $validator =  Validator::make($input ,[
-            'name'=>'required|string|max:255',
-            'key'=>'required'
+            'key'=>'required|string',
+            'value'=>'required|string'
         ]);
         if ($validator->fails())
         {
             return $this->sendError(null,$validator->errors());
         }
         $Homepage = Homepage::create([
-            'name' => $request->name,
-            'key' => $request->key
+            'key' => $request->key,
+            'value' => $request->value,
+
           ]);
 
 
@@ -122,8 +123,8 @@ class HomepageController extends BaseController
        }
             $input = $request->all();
            $validator =  Validator::make($input ,[
-                'name'=>'required|string|max:255',
-                'key'=>'required',
+               'key'=>'required|string',
+            'value'=>'required|string'
            ]);
            if ($validator->fails())
            {
@@ -131,8 +132,8 @@ class HomepageController extends BaseController
                return $this->sendError(null,$validator->errors());
            }
            $homepage->update([
-               'name' => $request->input('name'),
                'key' => $request->input('key'),
+               'value' => $request->input('value'),
            ]);
 
            $success['homepages']=New homepageResource($homepage);
