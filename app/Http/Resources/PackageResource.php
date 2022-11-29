@@ -17,9 +17,9 @@ class PackageResource extends JsonResource
         return [
             'id' =>$this->id,
             'name' => $this->name,
-            'monthly_price' => $this->description,
-            'yearly_price' => $this->file,
-            'discount' => $this->price,
+            'monthly_price' => $this->monthly_price,
+            'yearly_price' => $this->yearly_price,
+            'discount' => $this->discount,
             'status' => $this->status,
             'is_deleted' => $this->is_deleted
         ];

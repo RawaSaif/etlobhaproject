@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('number')->unique();
             $table->string('name');
             $table->string('icon');
-            $table->integer('parent_id')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
             $table->enum('for',['store','etlobha'])->default('etlobha');
             $table->unsignedBigInteger('store_id')->nullable();
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');

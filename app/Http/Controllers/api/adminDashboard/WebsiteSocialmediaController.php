@@ -43,9 +43,9 @@ class WebsiteSocialmediaController extends BaseController
         $input = $request->all();
         $validator =  Validator::make($input ,[
             'name'=>'required|string|max:255',
-            'logo'=>'required|string|max:255',
-            'link' =>'required',
-       
+            'logo'=>['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
+            'link' =>'required|url',
+
         ]);
         if ($validator->fails())
         {
@@ -55,7 +55,7 @@ class WebsiteSocialmediaController extends BaseController
             'name' => $request->name,
             'logo'=>$request->logo,
             'link' =>$request->link
-          
+
           ]);
 
          $success['website_socialmedia']=New website_socialmediaResource($website_socialmedia);
@@ -76,13 +76,13 @@ class WebsiteSocialmediaController extends BaseController
              if ($website_socialmedia->is_deleted==1){
              return $this->sendError("وسائل التواصل غير موجودة"," website_socialmedia is't exists");
              }
-    
-    
+
+
             $success['website_socialmedia']=New website_socialmediaResource($website_socialmedia);
             $success['status']= 200;
-    
+
              return $this->sendResponse($success,'تم  عرض بنجاح',' website_socialmedia showed successfully');
-    
+
         }
         public function changeStatus($id)
         {
@@ -90,7 +90,7 @@ class WebsiteSocialmediaController extends BaseController
              if ($website_socialmedia->is_deleted==1){
              return $this->sendError("وسائل التواصل غير موجودة","website_socialmedia is't exists");
              }
-    
+
             if($website_socialmedia->status === 'active'){
             $website_socialmedia->update(['status' => 'not_active']);
             }
@@ -99,9 +99,9 @@ class WebsiteSocialmediaController extends BaseController
             }
             $success['website_socialmedia']=New website_socialmediaResource($website_socialmedia);
             $success['status']= 200;
-    
+
              return $this->sendResponse($success,'تم تعديل حالة  بنجاح','website_socialmedia updated successfully');
-    
+
         }
     /**
      * Show the form for editing the specified resource.
@@ -130,9 +130,9 @@ class WebsiteSocialmediaController extends BaseController
             $input = $request->all();
            $validator =  Validator::make($input ,[
                 'name'=>'required|string|max:255',
-               'logo'=>'required|string|max:255',
-               'link' =>'required',
-            
+                'logo'=>['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
+               'link' =>'required|url',
+
            ]);
            if ($validator->fails())
            {
@@ -143,12 +143,12 @@ class WebsiteSocialmediaController extends BaseController
                'name' => $request->input('name'),
                'logo' => $request->input('logo'),
                'link' => $request->input('link'),
-            
+
            ]);
-          
+
            $success['website_socialmedia']=New website_socialmediaResource($website_socialmedia);
            $success['status']= 200;
-   
+
             return $this->sendResponse($success,'تم التعديل بنجاح','website_socialmedia updated successfully');
     }
 
@@ -166,10 +166,10 @@ class WebsiteSocialmediaController extends BaseController
             return $this->sendError(" وسائل التواصل غير موجودة","website_socialmedia is't exists");
             }
            $website_socialmedia->update(['is_deleted' => 1]);
-   
+
            $success['website_socialmedia']=New website_socialmediaResource($website_socialmedia);
            $success['status']= 200;
-   
+
             return $this->sendResponse($success,'تم حذف وسائل بنجاح','website_socialmedia deleted successfully');
     }
 }

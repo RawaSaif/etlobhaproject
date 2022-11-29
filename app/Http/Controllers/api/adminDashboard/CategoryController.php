@@ -41,7 +41,8 @@ class CategoryController extends BaseController
     public function store(Request $request)
     {
 
-        if($request->parent_id == null){
+        if($request->parent_id == null)
+        {
 
             $input = $request->all();
             $validator =  Validator::make($input ,[
@@ -55,13 +56,13 @@ class CategoryController extends BaseController
             }
 
             $cat=Category::orderBy('id', 'desc')->first();
-        if(is_null($cat)){
+          if(is_null($cat)){
           $number = 0001;
-        }else{
+          }else{
 
           $number=$cat->number;
           $number= ((int) $number) +1;
-        }
+          }
 
             $category =Category::create([
                 'name' => $request->name,

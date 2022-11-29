@@ -36,10 +36,17 @@ Route::post('changeReplaycommentStatus/{id}', [App\Http\Controllers\api\adminDas
 Route::post('changeMaintenanceStatus/{id}', [App\Http\Controllers\api\adminDashboard\MaintenanceController::class,'changeStatus']);
 Route::post('changePageStatus/{id}', [App\Http\Controllers\api\adminDashboard\PageController::class,'changeStatus']);
 Route::post('changePageCategoryStatus/{id}', [App\Http\Controllers\api\adminDashboard\PageCategoryController::class,'changeStatus']);
+Route::post('changeTechnicalSupportStatus/{id}', [App\Http\Controllers\api\adminDashboard\TechnicalSupportController::class,'changeStatus']);
 Route::post('changeCurrencyStatus/{id}', [App\Http\Controllers\api\adminDashboard\CurrencyController::class,'changeStatus']);
 Route::post('changewebsite_socialmediaStatus/{id}', [App\Http\Controllers\api\adminDashboard\WebsiteSocialmediaController::class,'changeStatus']);
 Route::post('changeHomepageStatus/{id}', [App\Http\Controllers\api\adminDashboard\HomepageController::class,'changeStatus']);
+Route::post('changePlaneStatus/{id}', [App\Http\Controllers\api\adminDashboard\PlanController::class,'changeStatus']);
+Route::post('changePackageStatus/{id}', [App\Http\Controllers\api\adminDashboard\PackageController::class,'changeStatus']);
+Route::post('changeTemplateStatus/{id}', [App\Http\Controllers\api\adminDashboard\TemplateController::class,'changeStatus']);
+
 Route::post('changeCouponStatus/{id}', [App\Http\Controllers\api\adminDashboard\CouponController::class,'changeStatus']);
+Route::post('changeNotificationStatus/{id}', [App\Http\Controllers\api\adminDashboard\NotificationController::class,'changeStatus']);
+Route::post('changeNotification_typeStatus/{id}', [App\Http\Controllers\api\adminDashboard\Notification_typesController::class,'changeStatus']);
 
 Route::resource('country',App\Http\Controllers\api\adminDashboard\CountryController::class);
 Route::resource('city',App\Http\Controllers\api\adminDashboard\CityController::class);
@@ -59,7 +66,13 @@ Route::resource('replaycomment',App\Http\Controllers\api\adminDashboard\Replayco
 Route::resource('maintenance',App\Http\Controllers\api\adminDashboard\MaintenanceController::class);
 Route::resource('page',App\Http\Controllers\api\adminDashboard\pageController::class);
 Route::resource('pagecategory',App\Http\Controllers\api\adminDashboard\PageCategoryController::class);
+Route::resource('technicalSupport',App\Http\Controllers\api\adminDashboard\TechnicalSupportController::class);
 Route::resource('currency',App\Http\Controllers\api\adminDashboard\CurrencyController::class);
 Route::resource('website_socialmedia',App\Http\Controllers\api\adminDashboard\WebsiteSocialmediaController::class);
 Route::resource('homepage',App\Http\Controllers\api\adminDashboard\HomepageController::class);
+Route::resource('plan',App\Http\Controllers\api\adminDashboard\PlanController::class);
+Route::resource('package',App\Http\Controllers\api\adminDashboard\PackageController::class);
+Route::resource('template',App\Http\Controllers\api\adminDashboard\TemplateController::class);
 Route::resource('coupons',App\Http\Controllers\api\adminDashboard\CouponController::class);
+Route::resource('notification',App\Http\Controllers\api\adminDashboard\NotificationController::class);
+Route::resource('notification_type',App\Http\Controllers\api\adminDashboard\Notification_typesController::class);
