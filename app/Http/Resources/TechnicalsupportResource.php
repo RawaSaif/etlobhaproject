@@ -20,6 +20,7 @@ class TechnicalsupportResource extends JsonResource
             'phoneNumber' =>$this->phoneNumber,
             'content' =>$this->content,
             'type'=>$this->type,
+            'supportstatus'=>$this->supportstatus,
             'status'=>$this->status,
             'is_deleted'=>$this->is_deleted,
             'store' => New StoreResource($this->store)
