@@ -125,7 +125,7 @@ class UnitController extends BaseController
             return $this->sendError(null,$validator->errors());
          }
          $unit->update([
-            'title' => $request->input('name'),
+            'title' => $request->input('title'),
             'file' => $request->input('file'),
              'course_id' => $request->input('course_id'),
 

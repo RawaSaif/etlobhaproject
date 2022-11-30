@@ -18,6 +18,7 @@ use App\Http\Controllers\CountryController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+// change status routers
 Route::post('changeCountryStatus/{id}',[App\Http\Controllers\api\adminDashboard\CountryController::class,'changeStatus']);
 Route::post('changeCityStatus/{id}',[App\Http\Controllers\api\adminDashboard\CityController::class,'changeStatus']);
 Route::post('changeMarketerStatus/{id}', [App\Http\Controllers\api\adminDashboard\MarketerController::class,'changeStatus']);
@@ -43,10 +44,11 @@ Route::post('changeHomepageStatus/{id}', [App\Http\Controllers\api\adminDashboar
 Route::post('changePlaneStatus/{id}', [App\Http\Controllers\api\adminDashboard\PlanController::class,'changeStatus']);
 Route::post('changePackageStatus/{id}', [App\Http\Controllers\api\adminDashboard\PackageController::class,'changeStatus']);
 Route::post('changeTemplateStatus/{id}', [App\Http\Controllers\api\adminDashboard\TemplateController::class,'changeStatus']);
-
 Route::post('changeCouponStatus/{id}', [App\Http\Controllers\api\adminDashboard\CouponController::class,'changeStatus']);
 Route::post('changeNotificationStatus/{id}', [App\Http\Controllers\api\adminDashboard\NotificationController::class,'changeStatus']);
 Route::post('changeNotification_typeStatus/{id}', [App\Http\Controllers\api\adminDashboard\Notification_typesController::class,'changeStatus']);
+Route::post('changeSettingStatus/{id}', [App\Http\Controllers\api\adminDashboard\SettingController::class,'changeStatus']);
+
 
 Route::resource('country',App\Http\Controllers\api\adminDashboard\CountryController::class);
 Route::resource('city',App\Http\Controllers\api\adminDashboard\CityController::class);
@@ -76,3 +78,4 @@ Route::resource('template',App\Http\Controllers\api\adminDashboard\TemplateContr
 Route::resource('coupons',App\Http\Controllers\api\adminDashboard\CouponController::class);
 Route::resource('notification',App\Http\Controllers\api\adminDashboard\NotificationController::class);
 Route::resource('notification_type',App\Http\Controllers\api\adminDashboard\Notification_typesController::class);
+Route::resource('setting',App\Http\Controllers\api\adminDashboard\SettingController::class);
