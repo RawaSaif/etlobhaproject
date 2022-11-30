@@ -45,7 +45,7 @@ class ReplaycontactController extends BaseController
         $validator =  Validator::make($input ,[
             'subject'=>'required|string|max:255',
             'message'=>'required|string',
-            'contact_id'=>'required|string|exists:contacts,id'
+            'contact_id'=>'required|exists:contacts,id'
         ]);
         if ($validator->fails())
         {
@@ -126,7 +126,7 @@ class ReplaycontactController extends BaseController
            $validator =  Validator::make($input ,[
             'subject'=>'required|string|max:255',
             'message'=>'required|string',
-            'contact_id'=>'required|string|exists:contacts,id'
+            'contact_id'=>'required|exists:contacts,id'
 
            ]);
            if ($validator->fails())

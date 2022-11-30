@@ -16,18 +16,19 @@ class SeoResource extends JsonResource
     {
         return [
             'id' =>$this->id,
-            'title' => $this->title,
-            'page_content' => $this->page_content,
-            'seo_title' => $this->seo_title,
-            'seo_link' => $this->seo_link,
-            'seo_desc' => $this->seo_desc,
-            'tags' => $this->tags,
+            'index_page_title' => $this->index_page_title,
+            'index_page_description' => $this->index_page_description,
+            
+            'show_pages' => $this->show_pages,
+            'link' => $this->link,
+           'robots' => $this->robots,
+            'key_words' => explode(',',$this->key_words),
             'status' => $this->status,
             'is_deleted' => $this->is_deleted,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
             'store' => New StoreResource($this->store)
-           
+
         ];
     }
 }

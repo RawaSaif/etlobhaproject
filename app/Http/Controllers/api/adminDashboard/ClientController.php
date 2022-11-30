@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api\adminDashboard;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Http\Resources\ClientResource;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\api\BaseController as BaseController;
 
-class ClientController extends Controller
+class ClientController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +16,12 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+     {
+      $success['clients']=ClientResource::collection(Client::where('is_deleted',0)->get());
+        $success['status']= 200;
+
+         return $this->sendResponse($success,'تم ارجاع العملاء بنجاح','clients return successfully');
+
     }
 
     /**
@@ -35,7 +42,42 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $input = $request->all();
+        $validator =  Validator::make($input ,[
+            'ID_number'=>'required|numeric',
+            'first_name'=>'required|string|max:255',
+            'last_name'=>'required|string|max:255',
+            'email'=>'required|email|unique:clients',
+            'gender'=>'required',
+            'phonenumber'=>'required|numeric',
+            'image'=>['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
+            'country_id'=>'required|exists:countries,id',
+            'city_id'=>'required|exists:cities,id',
+
+
+        ]);
+        if ($validator->fails())
+        {
+            return $this->sendError(null,$validator->errors());
+        }
+        $client = Client::create([
+            'ID_number'=> $request->ID_number,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'gender' => $request->gender,
+            'phonenumber' => $request->phonenumber,
+            'image' => $request->image,
+             'country_id' =>$request->country_id,
+             'city_id' =>$request->city_id,
+
+          ]);
+
+         // return new CountryResource($country);
+         $success['clients']=New ClientResource($client);
+        $success['status']= 200;
+
+         return $this->sendResponse($success,'تم إضافة عميل بنجاح','client Added successfully');
     }
 
     /**
@@ -44,9 +86,17 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show($client)
     {
-        //
+       $client = Client::query()->find($client);
+       if ($client->is_deleted==1){
+         return $this->sendError("المندوب غير موجودة","client is't exists");
+         }
+        $success['$clients']=New ClientResource($client);
+        $success['status']= 200;
+
+         return $this->sendResponse($success,'تم  عرض بنجاح','client showed successfully');
+
     }
 
     /**
@@ -68,8 +118,63 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Client $client)
+     {
+
+         $input = $request->all();
+        $validator =  Validator::make($input ,[
+            'ID_number'=>'required|numeric',
+            'first_name'=>'required|string|max:255',
+            'last_name'=>'required|string|max:255',
+            'email'=>'required|email|unique:clients',
+            'gender'=>'required',
+            'phonenumber'=>'required|numeric',
+            'image'=>['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
+            'country_id'=>'required|exists:countries,id',
+            'city_id'=>'required|exists:cities,id',
+
+        ]);
+        if ($validator->fails())
+        {
+            # code...
+            return $this->sendError(null,$validator->errors());
+        }
+        $client->update([
+            'ID_number'=> $request->input('ID_number'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            'gender' => $request->input('gender'),
+            'phonenumber' => $request->input('phonenumber'),
+            'image' => $request->input('image'),
+            'country_id' =>$request->input('country_id'),
+            'city_id' =>$request->input('city_id'),
+
+        ]);
+
+        $success['clients']=New ClientResource($client);
+        $success['status']= 200;
+
+         return $this->sendResponse($success,'تم التعديل بنجاح','modify  successfully');
+
+    }
+
+      public function changeStatus($id)
     {
-        //
+        $client = Client::query()->find($id);
+        if ($client->is_deleted==1){
+         return $this->sendError("العميل غير موجودة","client is't exists");
+         }
+        if($client->status === 'active'){
+         $client->update(['status' => 'not_active']);
+    }
+      else{
+      $client->update(['status' => 'active']);
+          }
+        $success['$clients']=New ClientResource($client);
+        $success['status']= 200;
+
+         return $this->sendResponse($success,'تم تعدبل حالة العميل بنجاح','client status updated successfully');
+
     }
 
     /**
@@ -78,8 +183,21 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $client)
+
+    public function destroy($client)
     {
-        //
+         $client =Client::query()->find($client);
+       if ($client->is_deleted==1){
+         return $this->sendError("المندوب غير موجودة","client is't exists");
+         }
+            $client->update(['is_deleted' => 1]);
+
+
+         $success['clients']=New ClientResource($client);
+
+        $success['status']= 200;
+
+         return $this->sendResponse($success,'تم حذف العميل  بنجاح','clients deleted successfully');
+
     }
 }

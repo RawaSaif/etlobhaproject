@@ -20,7 +20,7 @@ class SeoController extends BaseController
         $success['Seo']=SeoResource::collection(Seo::where('is_deleted',0)->get());
         $success['status']= 200;
 
-         return $this->sendResponse($success,'تم ارجاع الكلمات المفاتيحه بنجاح','Seo return successfully');
+         return $this->sendResponse($success,'تم ارجاع الكلمات المفتاحية بنجاح','Seo return successfully');
     }
 
     /**
@@ -45,11 +45,10 @@ class SeoController extends BaseController
         $validator =  Validator::make($input ,[
             'index_page_title'=>'required|string|max:255',
             'index_page_description'=>'required|string',
-            'key_words'=>'required|string',  
            'show_pages'=>'required',
-           'link'=>'required|url', 
-           'robots'=>'required|string', 
-            'store_id'=>'required|string|exists:stores,id'
+           'link'=>'required|url',
+           'robots'=>'required|string',
+            'store_id'=>'required|exists:stores,id'
         ]);
         if ($validator->fails())
         {
@@ -58,7 +57,7 @@ class SeoController extends BaseController
         $seo = Seo::create([
             'index_page_title' => $request->index_page_title,
             'index_page_description' => $request->index_page_description,
-            'key_words' => $request->key_words,
+             'key_words' =>implode(',', $request->key_words),
             'show_pages' => $request->show_pages,
             'link' => $request->link,
             'robots' => $request->robots,
@@ -69,7 +68,7 @@ class SeoController extends BaseController
          $success['seos']=New SeoResource($seo);
         $success['status']= 200;
 
-         return $this->sendResponse($success,'تم إضافةالكلمات المفاتيحه بنجاح','Seo Added successfully');
+         return $this->sendResponse($success,'تم إضافةالكلمات المفتاحية بنجاح','Seo Added successfully');
     }
 
     /**
@@ -82,18 +81,18 @@ class SeoController extends BaseController
     {
         $seo= Seo::query()->find($seo);
         if ($seo->is_deleted==1){
-               return $this->sendError("االكلمات المفاتيحه غير موجودة","Seo is't exists");
+               return $this->sendError("االكلمات المفتاحية غير موجودة","Seo is't exists");
                }
               $success['seos']=New SeoResource($seo);
               $success['status']= 200;
 
-               return $this->sendResponse($success,'تم عرض االكلمات المفاتيحه بنجاح','Seo showed successfully');
+               return $this->sendResponse($success,'تم عرض االكلمات المفتاحية بنجاح','Seo showed successfully');
     }
     public function changeStatus($id)
     {
         $seo = Seo::query()->find($id);
         if ($seo->is_deleted==1){
-         return $this->sendError("الكلمات المفاتيحه غير موجودة","seo is't exists");
+         return $this->sendError("الكلمات المفتاحية غير موجودة","seo is't exists");
          }
         if($seo->status === 'active'){
             $seo->update(['status' => 'not_active']);
@@ -103,7 +102,7 @@ class SeoController extends BaseController
     }
         $success['seo']=New seoResource($seo);
         $success['status']= 200;
-         return $this->sendResponse($success,'تم تعدبل حالة الكلمات المفاتيحه بنجاح',' seo status updared successfully');
+         return $this->sendResponse($success,'تم تعدبل حالة الكلمات المفتاحية بنجاح',' seo status updared successfully');
 
     }
     /**
@@ -127,17 +126,17 @@ class SeoController extends BaseController
     public function update(Request $request, Seo $seo)
     {
         if ($seo->is_deleted==1){
-            return $this->sendError("االكلمات المفاتيحه غير موجودة"," seo is't exists");
+            return $this->sendError("االكلمات المفتاحية غير موجودة"," seo is't exists");
        }
             $input = $request->all();
            $validator =  Validator::make($input ,[
             'index_page_title'=>'required|string|max:255',
             'index_page_description'=>'required|string',
-            'key_words'=>'required|string',  
+
            'show_pages'=>'required',
-           'link'=>'required|url', 
-           'robots'=>'required|string', 
-            'store_id'=>'required|string|exists:stores,id'
+           'link'=>'required|url',
+           'robots'=>'required|string',
+            'store_id'=>'required|exists:stores,id'
 
            ]);
            if ($validator->fails())
@@ -148,11 +147,12 @@ class SeoController extends BaseController
            $seo->update([
                'index_page_title' => $request->input('index_page_title'),
                'index_page_description' => $request->input('index_page_description'),
-               'key_words' => $request->input('key_words'),
+               'key_words' =>implode(',',$request->input('key_words')),
                'show_pages' => $request->input('show_pages'),
                'link' => $request->input('link'),
                'robots' => $request->input('robots'),
                 'store_id' => $request->input('store_id'),
+
            ]);
 
            $success['seos']=New seoResource($seo);
@@ -171,13 +171,13 @@ class SeoController extends BaseController
     {
         $seo =Seo::query()->find($seo);
         if ($seo->is_deleted==1){
-            return $this->sendError("االكلمات المفاتيحه غير موجودة","seo is't exists");
+            return $this->sendError("االكلمات المفتاحية غير موجودة","seo is't exists");
             }
            $seo->update(['is_deleted' => 1]);
 
            $success['seos']=New SeoResource($seo);
            $success['status']= 200;
 
-            return $this->sendResponse($success,'تم حذف الكلمات المفاتيحه بنجاح','seo deleted successfully');
+            return $this->sendResponse($success,'تم حذف الكلمات المفتاحية بنجاح','seo deleted successfully');
     }
 }
