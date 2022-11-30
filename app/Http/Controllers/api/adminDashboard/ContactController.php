@@ -45,7 +45,7 @@ class ContactController extends BaseController
         $validator =  Validator::make($input ,[
             'subject'=>'required|string|max:255',
             'message'=>'required|string',
-            'store_id'=>'required|string|exists:stores,id'
+            'store_id'=>'required|exists:stores,id'
         ]);
         if ($validator->fails())
         {
@@ -125,7 +125,7 @@ class ContactController extends BaseController
            $validator =  Validator::make($input ,[
             'subject'=>'required|string|max:255',
             'message'=>'required|string',
-            'store_id'=>'required|string|exists:stores,id'
+            'store_id'=>'required|exists:stores,id'
 
            ]);
            if ($validator->fails())
