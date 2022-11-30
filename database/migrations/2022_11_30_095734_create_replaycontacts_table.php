@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('replaycontacts', function (Blueprint $table) {
             $table->id();
             $table->string('subject');
             $table->text('message');
-            $table->unsignedBigInteger('store_id')->nullable();
-            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->unsignedBigInteger('contact_id')->nullable();
+            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
             $table->enum('status',['active','not_active'])->default('active');
             $table->boolean('is_deleted')->default(0);
             $table->timestamps();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('replaycontacts');
     }
 };
