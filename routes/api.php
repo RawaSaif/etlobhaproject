@@ -49,9 +49,9 @@ Route::post('changeNotificationStatus/{id}', [App\Http\Controllers\api\adminDash
 Route::post('changeNotification_typeStatus/{id}', [App\Http\Controllers\api\adminDashboard\Notification_typesController::class,'changeStatus']);
 Route::post('changeSectionStatus/{id}', [App\Http\Controllers\api\adminDashboard\SectionController::class,'changeStatus']);
 Route::post('changeSettingStatus/{id}', [App\Http\Controllers\api\adminDashboard\SettingController::class,'changeStatus']);
-Route::post('changeReplaycontactStatus/{id}', [App\Http\Controllers\api\adminDashboard\SettingController::class,'changeStatus']);
-Route::post('changeContactStatus/{id}', [App\Http\Controllers\api\adminDashboard\SettingController::class,'changeStatus']);
-Route::post('changeClientStatus/{id}', [App\Http\Controllers\api\adminDashboard\ClientController::class,'changeStatus']);
+Route::post('changeReplaycontactStatus/{id}', [App\Http\Controllers\api\adminDashboard\ReplaycontactController::class,'changeStatus']);
+Route::post('changeContactStatus/{id}', [App\Http\Controllers\api\adminDashboard\ContactController::class,'changeStatus']);
+Route::post('changeSeoStatus/{id}', [App\Http\Controllers\api\adminDashboard\SeoController::class,'changeStatus']);
 
 Route::resource('country',App\Http\Controllers\api\adminDashboard\CountryController::class);
 Route::resource('city',App\Http\Controllers\api\adminDashboard\CityController::class);
@@ -82,6 +82,6 @@ Route::resource('coupons',App\Http\Controllers\api\adminDashboard\CouponControll
 Route::resource('notification',App\Http\Controllers\api\adminDashboard\NotificationController::class);
 Route::resource('notification_type',App\Http\Controllers\api\adminDashboard\Notification_typesController::class);
 Route::resource('section',App\Http\Controllers\api\adminDashboard\SectionController::class);
-Route::resource('contact',App\Http\Controllers\api\adminDashboard\ContactaController::class);
-Route::resource('replaycontact',App\Http\Controllers\api\adminDashboard\SettingController::class);
-Route::resource('client',App\Http\Controllers\api\adminDashboard\ClientController::class);
+Route::resource('contact',App\Http\Controllers\api\adminDashboard\ContactController::class);
+Route::resource('replaycontact',App\Http\Controllers\api\adminDashboard\ReplaycontactController::class);
+Route::resource('seo',App\Http\Controllers\api\adminDashboard\SeoController::class);
