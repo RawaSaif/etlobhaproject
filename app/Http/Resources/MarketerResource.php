@@ -22,7 +22,7 @@ class MarketerResource extends JsonResource
             'email' => $this->email,
             'password' => $this->password,
             'gender' => $this->gender,
-            'mobile' => $this->mobile,
+            'phoneNumber' => $this->phoneNumber,
             'facebook' => $this->facebook,
             'snapchat' => $this->snapchat,
             'twiter' => $this->twiter,
@@ -33,7 +33,6 @@ class MarketerResource extends JsonResource
             'image' =>$this->image,
             'status' => $this->status,
             'is_deleted' => $this->is_deleted,
-           
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
             'country' => New CountryResource($this->country),

@@ -48,16 +48,17 @@ class MarketerController extends BaseController
             'email'=>'required|email|unique:users',
             'password'=>'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
             'gender'=>'required',
-            'mobile'=>'required|numeric',
-            'snapchat'=>'required',
-            'facebook'=>'required',
-            'twiter'=>'required',
+            'phoneNumber'=>'required|numeric',
+            'snapchat'=>'required|url',
+            'facebook'=>'required|url',
+            'twiter'=>'required|url',
             'whatsapp'=>'required',
-            'youtube'=>'required',
+            'youtube'=>'required|url',
+            'instegram'=>'required|url',
             'image'=>['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
             'country_id'=>'required|exists:countries,id',
             'city_id'=>'required|exists:cities,id',
-             'register_status' =>'required'
+             'socialmediatext' =>'string'
 
         ]);
         if ($validator->fails())
@@ -69,16 +70,17 @@ class MarketerController extends BaseController
             'email' => $request->email,
             'password' => $request->password,
             'gender' => $request->gender,
-            'mobile' => $request->mobile,
+            'phoneNumber' => $request->phoneNumber,
             'facebook' => $request->facebook,
             'snapchat' => $request->snapchat,
             'twiter' => $request->twiter,
             'whatsapp' => $request->whatsapp,
             'youtube' => $request->youtube,
+            'instegram' => $request->instegram,
              'image' => $request->image,
              'country_id' =>$request->country_id,
              'city_id' =>$request->city_id,
-             'register_status'=>$request->register_status
+             'socialmediatext'=>$request->socialmediatext
           ]);
 
          // return new CountryResource($country);
@@ -135,16 +137,17 @@ if ($marketer->is_deleted==1){
             'email'=>'required|email|unique:users',
             'password'=>'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
             'gender'=>'required',
-            'mobile'=>'required|numeric',
+            'phoneNumber'=>'required|numeric',
             'snapchat'=>'required',
             'facebook'=>'required',
             'twiter'=>'required',
             'whatsapp'=>'required',
             'youtube'=>'required',
+            'instegram'=>'required',
             'image'=>['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
           'country_id'=>'required|exists:countries,id',
             'city_id'=>'required|exists:cities,id',
-            'register_status'=>'required'
+            'socialmediatext' =>'string'
 
         ]);
         if ($validator->fails())
@@ -157,16 +160,17 @@ if ($marketer->is_deleted==1){
             'email' => $request->input('email'),
             'password' => $request->input('password'),
             'gender' => $request->input('gender'),
-            'mobile' => $request->input('mobile'),
+            'phoneNumber' => $request->input('phoneNumber'),
             'facebook' => $request->input('facebook'),
             'snapchat' => $request->input('snapchat'),
             'twiter' => $request->input('twiter'),
             'whatsapp' => $request->input('whatsapp'),
             'youtube' => $request->input('youtube'),
+            'instegram' => $request->input('instegram'),
              'image' => $request->input('image'),
              'country_id' =>$request->input('country_id'),
              'city_id' =>$request->input('city_id'),
-             'register_status' =>$request->input('register_status')
+             'socialmediatext' =>$request->input('socialmediatext')
         ]);
 
         $success['marketers']=New MarketerResource($marketer);
@@ -184,7 +188,7 @@ if ($marketer->is_deleted==1){
          }
         if($marketer->status === 'active'){
          $marketer->update(['status' => 'not_active']);
-    }
+        }
       else{
       $marketer->update(['status' => 'active']);
           }

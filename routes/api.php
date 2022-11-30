@@ -51,6 +51,7 @@ Route::post('changeSectionStatus/{id}', [App\Http\Controllers\api\adminDashboard
 Route::post('changeSettingStatus/{id}', [App\Http\Controllers\api\adminDashboard\SettingController::class,'changeStatus']);
 Route::post('changeReplaycontactStatus/{id}', [App\Http\Controllers\api\adminDashboard\SettingController::class,'changeStatus']);
 Route::post('changeContactStatus/{id}', [App\Http\Controllers\api\adminDashboard\SettingController::class,'changeStatus']);
+Route::post('changeClientStatus/{id}', [App\Http\Controllers\api\adminDashboard\ClientController::class,'changeStatus']);
 
 Route::resource('country',App\Http\Controllers\api\adminDashboard\CountryController::class);
 Route::resource('city',App\Http\Controllers\api\adminDashboard\CityController::class);
@@ -83,3 +84,4 @@ Route::resource('notification_type',App\Http\Controllers\api\adminDashboard\Noti
 Route::resource('section',App\Http\Controllers\api\adminDashboard\SectionController::class);
 Route::resource('contact',App\Http\Controllers\api\adminDashboard\ContactaController::class);
 Route::resource('replaycontact',App\Http\Controllers\api\adminDashboard\SettingController::class);
+Route::resource('client',App\Http\Controllers\api\adminDashboard\ClientController::class);

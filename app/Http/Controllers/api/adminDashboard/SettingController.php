@@ -128,7 +128,7 @@ class SettingController extends BaseController
             'name'=>'required|string|max:255',
             'description'=>'required|string',
             'link'=>'required|url',
-            'email'=>'required|email|unique',
+             'email'=>'required|email|unique:settings',
             'phoneNumber'=>'required|numeric',
             'logo'=>['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
             'icon'=>['required','image','mimes:ico','max:2048'],
