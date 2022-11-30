@@ -48,7 +48,7 @@ class CityController extends BaseController
             'name'=>'required|string|max:255',
             'name_en'=>'required|string|max:255',
             'code' =>'required',
-             'country_id'=>'required|exists:countries,id'
+            'country_id'=>'required|exists:countries,id'
         ]);
         if ($validator->fails())
         {
@@ -143,7 +143,7 @@ class CityController extends BaseController
             'code' => $request->input('code'),
             'country_id' => $request->input('country_id')
         ]);
-       
+
         $success['cities']=New CityResource($city);
         $success['status']= 200;
 

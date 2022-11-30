@@ -55,8 +55,8 @@ class MarketerController extends BaseController
             'whatsapp'=>'required',
             'youtube'=>'required',
             'image'=>['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
-            'country_id' =>'required',
-             'city_id' =>'required',
+            'country_id'=>'required|exists:countries,id',
+            'city_id'=>'required|exists:cities,id',
              'register_status' =>'required'
 
         ]);
@@ -142,8 +142,8 @@ if ($marketer->is_deleted==1){
             'whatsapp'=>'required',
             'youtube'=>'required',
             'image'=>['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
-            'country_id' =>'required',
-            'city_id' =>'required',
+          'country_id'=>'required|exists:countries,id',
+            'city_id'=>'required|exists:cities,id',
             'register_status'=>'required'
 
         ]);
