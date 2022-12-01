@@ -111,7 +111,7 @@ class UnitController extends BaseController
     public function update(Request $request, Unit $unit)
        {
          if ($unit->is_deleted==1){
-         return $this->sendError("الوح\ة غير موجودة","unit is't exists");
+         return $this->sendError("الوحدة غير موجودة","unit is't exists");
           }
          $input = $request->all();
          $validator =  Validator::make($input ,[

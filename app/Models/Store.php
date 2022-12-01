@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Store extends Model
 {
     use HasFactory;
-     protected $fillable = ['name','email','domain','phoneNumber','accountBankNumber','ID_file','accept',
-     'start_at','end_at','user_id','activity_id','package_id','country_id','city_id','status','is_deleted'];
+     protected $fillable = ['store_name','store_email','domain','icon','description','business_license','phonenumber','ID_file','accept_status',
+     'snapchat','facebook','twiter','youtube','instegram','logo','entity_type','user_id','activity_id','package_id','country_id','city_id','category_id','status','is_deleted'];
      public function city()
     {
         return $this->belongsTo(City::class, 'city_id', 'id');
@@ -37,10 +37,7 @@ class Store extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-    public function setting()
-    {
-        return $this->belongsTo(Setting::class, 'setting_id', 'id');
-    }
+
 
     public function page()
     {
@@ -68,4 +65,88 @@ class Store extends Model
 
         );
     }
+
+       public function setLogoAttribute($logo)
+    {
+        if (!is_null($logo)) {
+            if (gettype($logo) != 'string') {
+                $i = $logo->store('images/storelogo', 'public');
+                $this->attributes['logo'] = $logo->hashName();
+            } else {
+                $this->attributes['logo'] = $logo;
+            }
+        }
+    }
+
+    public function getLogoAttribute($logo)
+    {
+        if (is_null($logo)) {
+            return   asset('assets/media/man.png');
+        }
+        return asset('storage/images/storelogo') . '/' . $logo;
+    }
+
+
+       public function setIconAttribute($icon)
+    {
+        if (!is_null($icon)) {
+            if (gettype($icon) != 'string') {
+                $i = $icon->store('images/storeicon', 'public');
+                $this->attributes['icon'] = $icon->hashName();
+            } else {
+                $this->attributes['icon'] = $icon;
+            }
+        }
+    }
+
+    public function getIconAttribute($icon)
+    {
+        if (is_null($icon)) {
+            return   asset('assets/media/man.png');
+        }
+        return asset('storage/images/storeicon') . '/' . $icon;
+    }
+
+
+       public function setID_fileAttribute($ID_file)
+    {
+        if (!is_null($ID_file)) {
+            if (gettype($ID_file) != 'string') {
+                $i = $ID_file->store('ID_files/store', 'public');
+                $this->attributes['ID_file'] = $ID_file->hashName();
+            } else {
+                $this->attributes['ID_file'] = $ID_file;
+            }
+        }
+    }
+
+    public function getID_fileAttribute($ID_file)
+    {
+        if (is_null($ID_file)) {
+            return   asset('assets/media/man.png');
+        }
+        return asset('storage/ID_files/store') . '/' . $ID_file;
+    }
+
+
+       public function setBusiness_licenseAttribute($business_license)
+    {
+        if (!is_null($business_license)) {
+            if (gettype($business_license) != 'string') {
+                $i = $business_license->store('images/storebusiness_license', 'public');
+                $this->attributes['business_license'] = $business_license->hashName();
+            } else {
+                $this->attributes['business_license'] = $business_license;
+            }
+        }
+    }
+
+    public function getBusiness_licenseAttribute($business_license)
+    {
+        if (is_null($business_license)) {
+            return   asset('assets/media/man.png');
+        }
+        return asset('storage/images/storebusiness_license') . '/' . $business_license;
+    }
+
 }

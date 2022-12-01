@@ -14,6 +14,32 @@ class StoreResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+         return [
+        'id' =>$this->id,
+        'store_name'=>$this->store_name,
+        'domain'=>$this->domain,
+        'phonenumber'=>$this->phonenumber,
+        'store_email'=>$this->store_email,
+        'icon' =>$this->icon,
+        'description'=>$this->description,
+        'business_license'=>$this->business_license,
+        'ID_file' =>$this->ID_file,
+        'accept_status'=>$this->accept_status,
+        'snapchat'=>$this->snapchat,
+        'facebook' =>$this->facebook,
+        'twiter'=>$this->twiter,
+        'youtube'=>$this->youtube,
+        'instegram' =>$this->instegram,
+        'logo'=>$this->logo,
+        'entity_type'=>$this->entity_type,
+        'user' =>New UserResource($this->user),
+        'activity' =>New ActivityResource($this->activity),
+        'package' =>New PackageResource($this->package),
+        'category' =>New CategoryResource($this->category),
+        'country' => New CountryResource($this->country),
+        'city' => New CityResource($this->city),
+        'status'=>$this->status,
+        'is_deleted'=>$this->is_deleted
+    ];
     }
 }

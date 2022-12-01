@@ -16,16 +16,22 @@ return new class extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
-
-            $table->string('email')->unique();
+            $table->string('store_name');
+            $table->string('store_email')->unique();
             $table->string('domain');
-            $table->string('phoneNumber');
-            $table->string('accountBankNumber');
+            $table->string('icon');
+            $table->string('phonenumber');
+            $table->string('description');
+            $table->string('business_license');
             $table->string('ID_file');
-            $table->enum('accept',['pending','accepted','rejected'])->default('pending');
-            $table->timestamp('start_at')->nullable();
-            $table->timestamp('end_at')->nullable();
+            $table->enum('accept_status',['pending','accepted','rejected'])->default('pending');
+            $table->string('snapchat');
+            $table->string('facebook');
+            $table->string('twiter');
+            $table->string('youtube');
+            $table->string('instegram');
+            $table->string('logo');
+            $table->string('entity_type');
             $table->enum('status',['active','not_active'])->default('active');
             $table->boolean('is_deleted')->default(0);
             $table->unsignedBigInteger('user_id')->nullable();
@@ -38,8 +44,7 @@ return new class extends Migration
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->unsignedBigInteger('city_id')->nullable();
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
-            $table->unsignedBigInteger('setting_id')->nullable();
-            $table->foreign('setting_id')->references('id')->on('settings')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

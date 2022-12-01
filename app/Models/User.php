@@ -84,4 +84,24 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+       public function setImageAttribute($image)
+    {
+        if (!is_null($image)) {
+            if (gettype($image) != 'string') {
+                $i = $image->store('images/users', 'public');
+                $this->attributes['image'] = $image->hashName();
+            } else {
+                $this->attributes['image'] = $image;
+            }
+        }
+    }
+
+    public function getImageAttribute($image)
+    {
+        if (is_null($image)) {
+            return   asset('assets/media/man.png');
+        }
+        return asset('storage/images/users') . '/' . $image;
+    }
+
 }
