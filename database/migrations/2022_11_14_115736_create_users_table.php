@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unique();
+            $table->integer('user_id')->unique()->nullable();;
             $table->string('name');
-            $table->string('user_name');
+            $table->string('user_name')->nullable();;
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('gender',['male','female'])->nullable();
             $table->string('phonenumber')->nullable();
             $table->string('image')->nullable();
-            $table->enum('user_type',['admain','admain_employee','store','store_employee','customer'])->default('customer');
+            $table->enum('user_type',['admin','admin_employee','store','store_employee','customer'])->default('customer');
             $table->unsignedBigInteger('country_id')->nullable();
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
              $table->unsignedBigInteger('city_id')->nullable();
@@ -35,6 +35,8 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
+    
 
     /**
      * Reverse the migrations.
