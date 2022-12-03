@@ -62,6 +62,6 @@ class Product extends Model
         'offers_products',
         'product_id',
         'offer_id'
-        );
+        )->withPivot("type");
   }
 }
