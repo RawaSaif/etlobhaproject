@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('purchase_quantity')->nullable();
             $table->enum('purchase_type',['product','category'])->nullable();
             $table->integer('get_quantity')->nullable();
+            $table->enum('get_type',['product','category'])->nullable();
             $table->enum('offer1_type',['percent','free_product'])->nullable();
             $table->decimal('discount_percent')->nullable();
             $table->double('discount_value_offer2')->nullable();
