@@ -51,6 +51,6 @@ class Category extends Model
         'categories_offers',
         'category_id',
         'offer_id'
-        );
+        )->withPivot("type");
   }
 }

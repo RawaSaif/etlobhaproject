@@ -23,11 +23,12 @@ return new class extends Migration
             $table->integer('purchase_quantity')->nullable();
             $table->enum('purchase_type',['product','category'])->nullable();
             $table->integer('get_quantity')->nullable();
+             $table->enum('get_type',['product','category'])->nullable();
             $table->enum('offer1_type',['percent','free_product'])->nullable();
             $table->decimal('discount_percent')->nullable();
             $table->double('discount_value_offer2')->nullable();
             $table->enum('offer_apply',['all','selected_product','selected_category','selected_payment'])->nullable();
-            $table->enum('offer_type_minimum ',['amount','percent'])->nullable();
+            $table->enum('offer_type_minimum',['amount','percent'])->nullable();
             $table->decimal('offer_amount_minimum')->nullable();
             $table->boolean('coupon_status')->nullable();
             $table->double('discount_value_offer3')->nullable();
