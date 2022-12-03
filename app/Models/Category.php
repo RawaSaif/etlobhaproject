@@ -42,4 +42,15 @@ class Category extends Model
         }
         return asset('storage/images/icon/category') . '/' . $icon;
     }
+
+
+     public function offers()
+  {
+     return $this->belongsToMany(
+        Offer::class,
+        'categories_offers',
+        'category_id',
+        'offer_id'
+        );
+  }
 }
