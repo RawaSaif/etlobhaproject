@@ -54,4 +54,14 @@ class Product extends Model
             'product_id',
             'option_id');
     }
+
+    public function offers()
+  {
+     return $this->belongsToMany(
+        Offer::class,
+        'offers_products',
+        'product_id',
+        'offer_id'
+        );
+  }
 }

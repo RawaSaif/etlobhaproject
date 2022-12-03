@@ -39,4 +39,14 @@ class Paymenttype extends Model
         }
         return asset('storage/images/paymenttype') . '/' . $image;
     }
+
+   public function offers()
+  {
+     return $this->belongsToMany(
+        Offer::class,
+        'offers_paymenttypes',
+        'paymenttype_id',
+        'offer_id'
+        );
+  }
 }
