@@ -62,7 +62,8 @@ class OfferController extends BaseController
              'offer_amount_minimum' =>'required_if:offer_type,fixed_amount,percent',
               'coupon_status' =>'required_if:offer_type,fixed_amount,percent',
              'discount_value_offer3' =>'required_if:offer_type,percent',
-            'maximum_discount' =>'required_if:offer_type,percent'
+            'maximum_discount' =>'required_if:offer_type,percent',
+            'get' =>'required_if:offer_type,percent'
 
         ]);
         if ($validator->fails())
@@ -92,10 +93,13 @@ class OfferController extends BaseController
           if($request->offer_type=="If_bought_gets"){
           switch($request->purchase_type) {
             case('category'):
-                $offer->categories()->attach(explode(',', $request->category_id),["type" => $request->type]);
+                $offer->categories()->attach(explode(',', $request->category_id),["type" => "buy"]);
+                $offer->categories()->attach(explode(',', $request->get_category_id),["type" =>"get" ]);
+
                 break;
             case('product'):
-               $offer->products()->attach(explode(',', $request->product_id),["type" => $request->type]);
+               $offer->products()->attach(explode(',', $request->product_id),["type" => "buy"]);
+                $offer->products()->attach(explode(',', $request->get_product_id),["type" => "get"]);
             break;
 
             }
@@ -103,13 +107,13 @@ class OfferController extends BaseController
         else{
             switch($request->offer_apply) {
             case('selected_product'):
-                $offer->products()->attach(explode(',', $request->product_id),["type" => $request->type]);
+                $offer->products()->attach(explode(',', $request->select_product_id),["type" => "select"]);
                 break;
             case('selected_category'):
-            $offer->categories()->attach(explode(',', $request->category_id),["type" => $request->type]);
+            $offer->categories()->attach(explode(',', $request->select_category_id),["type" => "select"]);
             break;
              case('selected_payment'):
-            $offer->paymenttypes()->attach(explode(',', $request->payment_id));
+            $offer->paymenttypes()->attach(explode(',', $request->select_payment_id));
             break;
 
           }
@@ -126,9 +130,39 @@ class OfferController extends BaseController
      * @param  \App\Models\Offer  $offer
      * @return \Illuminate\Http\Response
      */
-    public function show(Offer $offer)
+    public function show($offer)
+   {
+        $offer = Offer::query()->find($offer);
+        if ($offer->is_deleted==1){
+        return $this->sendError("العرض غير موجود","offer is't exists");
+        }
+
+
+       $success['offers']=New OfferResource($offer);
+       $success['status']= 200;
+
+        return $this->sendResponse($success,'تم عرض الخدمة  بنجاح','offer showed successfully');
+    }
+
+
+      public function changeStatus($id)
     {
-        //
+        $offer = Offer::query()->find($id);
+         if ($offer->is_deleted==1){
+         return $this->sendError(" العرض غير موجود","offer is't exists");
+         }
+
+        if($offer->status === 'active'){
+            $offer->update(['status' => 'not_active']);
+        }
+        else{
+            $offer->update(['status' => 'active']);
+        }
+        $success['offers']=New OfferResource($offer);
+        $success['status']= 200;
+
+         return $this->sendResponse($success,'تم تعديل حالة العرض بنجاح','offer updated successfully');
+
     }
 
     /**
@@ -160,8 +194,17 @@ class OfferController extends BaseController
      * @param  \App\Models\Offer  $offer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Offer $offer)
-    {
-        //
+    public function destroy($offer)
+     {
+        $offer = Offer::query()->find($offer);
+        if ($offer->is_deleted==1){
+            return $this->sendError("العرض غير موجود","offer is't exists");
+            }
+           $offer->update(['is_deleted' => 1]);
+
+           $success['offers']=New OfferResource($offer);
+           $success['status']= 200;
+
+            return $this->sendResponse($success,'تم حذف العرض بنجاح','offer deleted successfully');
     }
 }

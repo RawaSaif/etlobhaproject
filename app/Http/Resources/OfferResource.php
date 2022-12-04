@@ -35,7 +35,7 @@ class OfferResource extends JsonResource
             'discount_value_offer3' =>$this->discount_value_offer3,
             'maximum_discount' => $this->maximum_discount,
             'status' => $this->status,
-            'is_deleted' => $this->is_deleted
+            'is_deleted' =>$this->is_deleted
         ];
     }
 }
